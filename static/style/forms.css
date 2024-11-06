@@ -1,0 +1,58 @@
+
+
+.container-form{
+    margin: 4em;
+}
+
+section {
+    width: 550px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    padding: 2em;
+    color: whitesmoke;
+    border-radius: 30px;
+}
+
+form h1{
+    font-size: 3em;
+    padding-bottom: 1em;
+}
+
+form button{
+    font-size: 2em;
+    padding: 0.5em;
+    margin-top: 2em;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    border-radius: 1.5em;
+    border-color: whitesmoke;
+}
+
+form p{
+    font-size:1.2em;
+}
+
+/*form ul,*/
+/*.helptext{*/
+/*    display:none*/
+/*}*/
+
+label,
+input
+ {
+    display: block;
+    padding: 0.15em;
+}
+
+label{
+    font-size:1.2em ;
+}
+
+input {
+    display: block;
+    margin: 0 auto;
+}
+
+
+

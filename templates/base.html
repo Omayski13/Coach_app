@@ -1,0 +1,24 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <title>Coach App</title>
+</head>
+<body>
+{% include 'navigation.html' %}
+
+{% block content %}
+{% endblock %}
+
+<footer>
+    &copy;Kristiyan Omayski 2024. All rights reserved.
+</footer>
+
+</body>
+</html>

@@ -6,4 +6,4 @@ from django.views.generic import TemplateView
 
 
 class HomePageView(TemplateView):
-    template_name = 'navigation.html'
+    template_name = 'home-page.html'
