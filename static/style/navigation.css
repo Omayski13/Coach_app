@@ -24,14 +24,24 @@ nav{
     padding: 0.2em;
     font-size:2em;
 }
+.nav-image{
+    display: flex;
+    justify-content: start;
+}
+
 
 nav a {
        text-decoration: none
 }
 
 
-.nav-other{
-    padding-right: 10em;
+.nav-other {
+
+
+}
+
+.nav-profile{
+
 }
 
 
@@ -48,6 +58,7 @@ nav a {
 
 nav a{
     color: whitesmoke;
+    /*color: red;*/
 }
 
 main {
@@ -56,11 +67,12 @@ main {
 }
 
 footer {
+    position: relative;
+    width: 100%;
     background-color: darkslategrey;
     text-align: center ;
     padding: 1.5em;
     color: whitesmoke;
-
 
 }
 
