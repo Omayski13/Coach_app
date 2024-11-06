@@ -1,0 +1,30 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style/style.css' %}" />
+    <title>Coach App</title>
+  </head>
+  
+  
+<body>
+<h1><a class="index-navigation" href="{% url 'home-page' %}">Coach App</a></h1>
+<nav>
+    <!-- if the user has not created a profile -->
+    <a href="{% url 'profile-create' %}">Create Profile</a>
+    <a href="{% url 'profile-create' %}">Login</a>
+    <a href="{% url 'profile-create' %}">Profile details</a>
+    <p class="kriso">Kriso e pich</p>
+
+    <!-- if the user has created a profile -->
+    <a href="{% url 'catalogue' %}">Info</a>
+    <a href="{% url 'recipe-create' %}">Create Drill</a>
+    <a href="{% url 'profile-details' %}">All Drills</a>
+</nav>
+
+</body>
+</html>
