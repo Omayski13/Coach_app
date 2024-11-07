@@ -9,6 +9,17 @@ class UserNameTextsMixin():
         })
 
 
+class UserNameOrEmailTextsMixin():
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = "Потр. име или имейл"
+        self.fields['username'].help_text = ""
+        self.fields['username'].widget.attrs.update({
+            'placeholder': "Въведи потр. име или имейл",
+            'class': 'wide-input'
+        })
+
+
 class PasswordTextsMixin():
    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
