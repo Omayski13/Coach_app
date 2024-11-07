@@ -92,6 +92,11 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'coach_app.accounts.authentication.EmailOrUsernameBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -140,3 +145,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 LOGIN_REDIRECT_URL = reverse_lazy('home-page')
+LOGOUT_REDIRECT_URL = reverse_lazy('home-page')
