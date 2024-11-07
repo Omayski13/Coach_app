@@ -1,16 +1,15 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.forms import forms
+
+from coach_app.accounts.mixins import UserNameTextsMixin, EmailTextsMixin, Pass12TextsMixin, PasswordTextsMixin
 
 
-class CustomUserForm(UserCreationForm):
+class CustomUserForm(UserNameTextsMixin,EmailTextsMixin,Pass12TextsMixin,UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ('username', 'email',)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].label = "Потребителско име"
-        self.fields['username'].help_text = "Потребителско име"
-        self.fields['email'].label = "Имейл"
-        self.fields['password1'].label = "Парола"
-        self.fields['password2'].label = "Потвърди парола"
+class CustomLoginForm(UserNameTextsMixin,PasswordTextsMixin, AuthenticationForm):
+    pass
+

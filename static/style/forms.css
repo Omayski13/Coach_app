@@ -42,7 +42,11 @@ label,
 input
  {
     display: block;
-    padding: 0.15em;
+    padding: 0.1em;
+}
+
+.wide-input {
+    width: 300px; /* Adjust the width as needed */
 }
 
 label{
@@ -51,7 +55,7 @@ label{
 
 input {
     display: block;
-    margin: 0 auto;
+    margin: 0 auto ;
 }
 
 

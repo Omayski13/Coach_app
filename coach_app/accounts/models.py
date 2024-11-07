@@ -5,7 +5,16 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
+
+    club = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+    )
+
     trophies = models.IntegerField(
         default=0,
     )
+
+
 

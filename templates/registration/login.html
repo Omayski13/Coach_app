@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-form">
+        <section id="create-user">
+            <form class="form-group" method="post">
+                <h1>Вход</h1>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button>Влез</button>
+            </form>
+        </section>
+    </div>
+{% endblock %}
