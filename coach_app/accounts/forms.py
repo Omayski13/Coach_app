@@ -4,8 +4,7 @@ from django.forms import forms
 
 from coach_app.accounts.mixins import UserNameTextsMixin, EmailTextsMixin, Pass12TextsMixin, PasswordTextsMixin, \
     UserNameOrEmailTextsMixin
-from coach_app.accounts.validators import CustomMinimumLengthValidator, CustomCommonPasswordValidator, \
-    CustomNumericPasswordValidator
+
 
 
 class AppUserCreationForm(UserNameTextsMixin,EmailTextsMixin,Pass12TextsMixin,UserCreationForm):
