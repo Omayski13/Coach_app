@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-form">
+        <section id="create-user">
+            <form class="form-group" method="post">
+                <div class="details-container">
+                    <h1>Профил</h1>
+                    {% if appuser.profile.profile_picture %}
+                        <img class="details" src="{{ appuser.profile_picture }}">
+                    {% else %}
+                        <img class="details-img" src="{% static 'images/common-profile-picture.png' %}">
+                    {% endif %}
+
+                    {% if appuser.profile.get_full_name %}
+                        <h1><strong>{{ appuser.profile.get_full_name }}</strong></h1>
+                    {% endif %}
+
+                    <h2 class="details"><span class="details-text">Потребителско име:</span> <strong>{{ appuser.username }}</strong>
+                    </h2>
+
+                    {% if appuser.profile.club %}
+                        <h2 class="details"><span class="details-text">Oтбор:</span> <strong>{{ appuser.profile.club }}</strong></h2>
+                    {% endif %}
+
+                    {% if appuser.profile.license %}
+                        <h2 class="details"><span class="details-text">Лиценз:</span> <strong>{{ appuser.profile.license }}</strong>
+                        </h2>
+                    {% endif %}
+                    <a class="details-link" href="#">Редактирай информация</a>
+                </div>
+            </form>
+        </section>
+    </div>
+{% endblock %}
