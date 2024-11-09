@@ -17,18 +17,18 @@ class AppUser(AbstractBaseUser,PermissionsMixin):
             "Задължително поле. Макс 50 символа - само букви цифри и @/./+/-/_"
         ),
         validators=[username_validator],
-        # error_messages={
-        #     "unique": _("Това потребителско име вече е заето."),
-        # },
+        error_messages={
+            "unique": _("Това потребителско име вече е заето."),
+        },
     )
     email = models.EmailField(
         unique=True,
-        # error_messages={
-        #     "unique": _("Потребител с този имейл вече е регистриран"),
-        # },
+        error_messages={
+            "unique": _("Потребител с този имейл вече е регистриран"),
+        },
     )
 
-    EMAIL_FIELD = "email"
+
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]
 

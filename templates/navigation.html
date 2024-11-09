@@ -3,7 +3,7 @@
     <nav>
         <div class="nav-image">
             <a href="{% url 'home-page' %}">
-                <img src="{% static 'images/logo-darkslategrey.png' %}" alt="" width="400" height="120">
+                <img class="nav-image" src="{% static 'images/logo-darkslategrey.png' %}" alt="" width="400" height="120">
             </a>
 
         </div>
@@ -18,7 +18,7 @@
 
         <div class="nav-profile">
             {% if request.user.is_authenticated %}
-                <a href="#">Профил</a>
+                <a href="{% url 'user-details' request.user.pk %}">Профил</a>
                 <a href="{% url 'user-logout' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Изход</a>
                
                 <form id="logout-form" method="post" action="{% url 'user-logout' %}" style="display: none;">

@@ -1,0 +1,10 @@
+.details-img{
+    width: 180px;       /* Set the width of the image */
+    height: 180px;      /* Set the height of the image (same as width for circular shape) */
+    border-radius: 50%; /* Make the image round */
+    border: darkslategrey 5px solid;
+    object-fit: cover;  /* Ensure the image is cropped and fits the container */
+    margin-bottom: 2.5em;
+
+}
+
