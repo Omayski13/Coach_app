@@ -1,10 +1,10 @@
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
-from coach_app.accounts.forms import AppUserCreationForm
-from coach_app.accounts.models import AppUser
+from coach_app.accounts.forms import AppUserCreationForm, AppUserEditForm
+from coach_app.accounts.models import AppUser, Profile
 
 
 # Create your views here.
@@ -23,5 +23,31 @@ class UserDetailsView(DetailView):
     template_name = 'accounts/details.html'
     model = AppUser
 
+
+class UserEditView(UpdateView):
+    template_name = 'accounts/accounts-edit.html'
+    form_class = AppUserEditForm
+    model = Profile
+    success_url = reverse_lazy('home-page')
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['form'].fields['username'].initial = self.request.user.username
+
+        return context
+
+    # def test_func(self):
+    #     profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
+    #     return self.request.user == profile.user
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'user-details',
+            kwargs={
+                'pk': self.object.pk,
+            }
+        )
 
 

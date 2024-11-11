@@ -32,6 +32,8 @@ class Profile(models.Model):
 
     profile_picture = models.ImageField(
         upload_to='accounts/',
+        null=True,
+        blank=True,
     )
 
     license = models.CharField(

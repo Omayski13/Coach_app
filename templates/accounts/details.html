@@ -7,7 +7,7 @@
                 <div class="details-container">
                     <h1>Профил</h1>
                     {% if appuser.profile.profile_picture %}
-                        <img class="details" src="{{ appuser.profile_picture }}">
+                        <img class="details-img" src="{{ appuser.profile.profile_picture.url }}">
                     {% else %}
                         <img class="details-img" src="{% static 'images/common-profile-picture.png' %}">
                     {% endif %}
@@ -27,7 +27,7 @@
                         <h2 class="details"><span class="details-text">Лиценз:</span> <strong>{{ appuser.profile.license }}</strong>
                         </h2>
                     {% endif %}
-                    <a class="details-link" href="#">Редактирай информация</a>
+                    <a class="details-link" href="{% url 'user-edit' appuser.pk %}">Редактирай</a>
                 </div>
             </form>
         </section>
