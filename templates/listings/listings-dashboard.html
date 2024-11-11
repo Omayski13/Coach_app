@@ -9,8 +9,8 @@
                            <h2>
                             {{ listing.club }} търси треньор за {{ listing.for_age_group }}
                             <a href="{% url 'listing-details' listing.pk %}"><i class="fa-solid fa-eye" id="first-icon"></i></a> 
-                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                            <a href="{% url 'listing-edit' listing.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'listing-delete' listing.pk %}"><i class="fa-solid fa-trash"></i></a>
                         </h2>
                     {% else %}
                         <h2>
@@ -24,8 +24,8 @@
                         <h2>
                             {{ listing.club }} търси треньор 
                             <a href="{% url 'listing-details' listing.pk %}"><i class="fa-solid fa-eye" id="first-icon"></i></a> 
-                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                            <a href="{% url 'listing-edit' listing.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'listing-delete' listing.pk %}"><i class="fa-solid fa-trash"></i></a>
                         </h2>
                     {% else %}
                         <h2>

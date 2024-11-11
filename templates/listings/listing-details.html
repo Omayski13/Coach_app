@@ -25,7 +25,10 @@
                         <strong>{{ listing.licence_required }}</strong></h2>
                     {% if listing.experience_needed %}
                     <h2 class="details"><span class="details-text"> Нужен опит:</span>
-                        <strong>{{ listing.experience_needed }}</strong><span class="details-text"> години</span></h2>
+                        <strong>{{ listing.experience_needed }} години</strong></h2>
+                        {% else %}
+                        <h2 class="details"><span class="details-text"> Нужен опит:</span>
+                        <strong>Не е нужен опит</strong></h2>
                     {% endif %}
                 
                     <h1 class="listing-details">Контакти</h1>
