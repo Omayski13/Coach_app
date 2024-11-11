@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'coach_app.common',
     'coach_app.accounts',
+    'coach_app.listings',
 ]
 
 MIDDLEWARE = [
