@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-form">
+        <section id="create-user">
+            <form class="form-group" method="post" enctype="multipart/form-data">
+                <div class="details-container">
+                    {% csrf_token %}
+                    {{form}}
+                    <button>Редакция</button>
+                </div>
+            </form>
+        </section>
+    </div>
+{% endblock %}
