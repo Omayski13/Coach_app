@@ -1,0 +1,27 @@
+
+.details-link {
+    display: inline-block;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2em;
+    padding: 0.5em;
+    margin-top: 2em;
+    border-radius: 1.5em;
+    cursor: pointer;
+    border: whitesmoke solid 0.1em;
+
+}
+
+a:hover{
+    color: whitesmoke;
+}
+
+.details-text{
+    font-style: italic;
+}
+
+h2.details{
+    padding: 0.2em;
+}
