@@ -1,6 +1,6 @@
 from django.db import models
 
-from coach_app.accounts.choices import AccountsLicenceChoices
+from coach_app.choices import AccountsLicenceChoices
 from coach_app.accounts.models import AppUser
 
 
