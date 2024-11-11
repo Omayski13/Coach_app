@@ -8,7 +8,7 @@ class AccountsLicenceChoices(models.TextChoices):
     UEFA_C = 'Uefa C', 'Uefa C'
     NATIONAL_C = 'National C', 'National C'
     GRASSROOTS_D = 'Grassroots D', 'Grassroots D'
-    NONE = 'Няма', 'Няма'
+    NONE = 'Без лиценз', 'Без лиценз'
 
 
 
@@ -20,4 +20,4 @@ class AgeGroupsChoices(models.TextChoices):
     U14 = 'U13 - U14', 'U13 - U14'
     U16 = 'U15 - U16', 'U15 - U16'
     U19 = 'U16 - U19', 'U16 - U19'
-    SENIOR = 'Мъже/Жени', 'Мъже/Жени'
+    SENIOR = 'Мъже', 'Мъже'

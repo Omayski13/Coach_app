@@ -1,4 +1,5 @@
-from django.core.validators import MinValueValidator
+from django.contrib.auth import get_user_model
+from django.core.validators import MinValueValidator, MinLengthValidator
 from django.db import models
 
 from coach_app.choices import AccountsLicenceChoices, AgeGroupsChoices
@@ -11,7 +12,10 @@ class Listing(models.Model):
         max_length=50,
     )
 
-    experience_needed = models.PositiveSmallIntegerField()
+    experience_needed = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+    )
 
     licence_required = models.CharField(
         max_length=30,
@@ -37,7 +41,19 @@ class Listing(models.Model):
 
     telephone_number = models.CharField(
         max_length=13,
-        validators=[MinValueValidator(10)],
+        validators=[MinLengthValidator(10)],
+    )
+
+    position = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+    )
+
+    author = models.ForeignKey(
+        to=get_user_model(),
+        on_delete=models.CASCADE,
+        related_name='listings'
     )
 
 
