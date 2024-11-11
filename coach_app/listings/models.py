@@ -37,7 +37,7 @@ class Listing(models.Model):
 
     telephone_number = models.CharField(
         max_length=13,
-        validators=[MinValueValidator(10)]
+        validators=[MinValueValidator(10)],
     )
 
 
