@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('coach_app.common.urls')),
     path('accounts/', include('coach_app.accounts.urls')),
     path('listings/', include('coach_app.listings.urls')),
+    path('drills/', include('coach_app.drills.urls')),
 ]
 
 if settings.DEBUG:

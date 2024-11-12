@@ -20,7 +20,7 @@ class UserRegisterVIew(CreateView):
 
 
 class UserDetailsView(DetailView):
-    template_name = 'accounts/details.html'
+    template_name = 'accounts/accounts-details.html'
     model = AppUser
 
 

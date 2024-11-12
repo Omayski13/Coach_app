@@ -21,3 +21,12 @@ class AgeGroupsChoices(models.TextChoices):
     U16 = 'U15 - U16', 'U15 - U16'
     U19 = 'U16 - U19', 'U16 - U19'
     SENIOR = 'Мъже', 'Мъже'
+
+
+class FocusChoices(models.TextChoices):
+    SHOOTING = 'Удари', 'Удари'
+    PASSING = 'Подаване','Подаване'
+    DRIBBLING = 'Дрибъл','Дрибъл'
+    POSSESSION = 'Владение','Владение'
+    ONE_VS_ONE = '1 срещу 1','1 срещу 1'
+    TWO_VS_ONE = '2 срещу 1','2 срещу 1'
