@@ -5,7 +5,7 @@
         <section id="create-user">
             <form class="form-group" method="post" enctype="multipart/form-data">
                 <div class="details-container">
-                    <h1 id="listing-delete" class="listing-details">Обява номер: {{ listing.pk }}</h1>
+                    <h1 class="listing-delete">Обява номер: {{ listing.pk }}</h1>
                     {% csrf_token %}
                     {{form}}
                     <button>Изтрий</button>
