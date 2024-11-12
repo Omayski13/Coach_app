@@ -9,7 +9,7 @@ from coach_app.common.mixins import CreatedAtMixin, UpdatedAtMixin, ForAgeGroupM
 
 class Drill(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
     graphics = models.ImageField(
-        upload_to='drills',
+        upload_to='drills/',
         null=True,
         blank=True,
     )
@@ -37,14 +37,21 @@ class Drill(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
 
     series = models.CharField()
 
-    duration = models.CharField()
+    duration = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+    )
 
     coaching_points = models.TextField(
         max_length=250,
+        null=True,
+        blank=True,
     )
 
-    progression = models.CharField(
+    progression = models.TextField(
         max_length=150,
+        null=True,
+        blank=True,
     )
 
     author = models.ForeignKey(
