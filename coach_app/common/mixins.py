@@ -1,5 +1,8 @@
 from django.db import models
 
+from coach_app.choices import AgeGroupsChoices
+
+
 class DisableFieldsMixin():
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -23,3 +26,15 @@ class UpdatedAtMixin(models.Model):
 
     class Meta:
         abstract = True
+
+
+class ForAgeGroupMixin(models.Model):
+    for_age_group = models.CharField(
+        max_length=30,
+        choices=AgeGroupsChoices.choices,
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        abstract=True
