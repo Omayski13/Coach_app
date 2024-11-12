@@ -3,12 +3,13 @@ from django.core.validators import MinValueValidator, MinLengthValidator
 from django.db import models
 
 from coach_app.choices import AccountsLicenceChoices, AgeGroupsChoices
+from coach_app.common.mixins import UpdatedAtMixin, CreatedAtMixin
 from coach_app.listings.validators import TelephoneValidator
 
 
 # Create your models here.
 
-class Listing(models.Model):
+class Listing(CreatedAtMixin,UpdatedAtMixin):
     club = models.CharField(
         max_length=50,
     )
