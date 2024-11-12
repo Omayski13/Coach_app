@@ -23,7 +23,7 @@ class ListingCreateView(CreateView):
 
 class ListingDashboardView(ListView):
     template_name = 'listings/listings-dashboard.html'
-    queryset = Listing.objects.all()
+    queryset = Listing.objects.all().order_by('-created_at')
     context_object_name = 'listings'
 
 
