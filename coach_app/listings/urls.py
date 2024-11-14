@@ -1,6 +1,5 @@
 from django.urls import path, include
 
-from coach_app.common.views import HomePageView
 from coach_app.listings.views import ListingCreateView, ListingDashboardView, ListingDetailView, ListingEditView, \
     ListingDeleteView
 

@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <div class="container-drills">
         <div class="drills">
             {% for drill in drills %}
                 <div class="drill-card">
                     <div class="image-wrap">
-                        <!-- car image -->
-                        <img
-                                src="{{ drill.graphics.url }}"
-                                alt="Rally"
-                        />
+                        {% if drill.graphics %}
+                            <img src="{{ drill.graphics.url }}" alt="Drill"/>
+                        {% else %}
+                            <img src="{% static 'images/drills-common.png' %}">
+                        {% endif %}
                     </div>
                     <div class="drill-info">
                         <!-- car type -->
@@ -26,9 +27,9 @@
                         <div class="drill-buttons">
                             <a class="details-drills" href="#">Разгледай<i class="fa-solid fa-eye"></i></a>
                             {% if drill.author.pk == request.user.pk %}
-                                <a class="details-drills" href="#">Редактирай<i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                                <a class="details-drills" href="#">Изтрий<i class="fa-solid fa-trash"></i></a>
+                                <a class="details-drills" href="#"><i id="drills-edit" class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="details-drills" href="{% url 'drill-delete' drill.pk %}"><i
+                                        id="drills-delete" class="fa-solid fa-trash"></i></a>
                             {% endif %}
                         </div>
                     </div>
@@ -74,10 +75,12 @@
                         <a href="?focus=Дрибъл{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">Дрибъл</a>
                     </li>
                     <li class="{% if request.GET.focus == '1 срещу 1' %}active{% endif %}">
-                        <a href="?focus=1 срещу 1{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">1 срещу 1</a>
+                        <a href="?focus=1 срещу 1{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">1
+                            срещу 1</a>
                     </li>
                     <li class="{% if request.GET.focus == '2 срещу 1' %}active{% endif %}">
-                        <a href="?focus=2 срещу 1{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">2 срещу 1</a>
+                        <a href="?focus=2 срещу 1{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">2
+                            срещу 1</a>
                     </li>
                 </ul>
             </div>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-form">
+        <section id="create-user">
+            <form class="form-group" method="post" enctype="multipart/form-data">
+                <div class="details-container">
+                    <h1 class="listing-delete">{{ drill.name }}</h1>
+                    {% if drill.graphics %}
+                        <img src="{{ drill.graphics.url}}" style="width: 420px; height: 320px">
+                    {% endif %}
+                    {% csrf_token %}
+                    {{form}}
+                    <button>Изтрий</button>
+                </div>
+            </form>
+        </section>
+    </div>
+{% endblock %}
