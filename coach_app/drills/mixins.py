@@ -1,3 +1,29 @@
+class DrillGraphicsTextsMixin():
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['graphics'].label = "Графика "
+        self.fields['graphics'].widget.attrs.update({
+            'class': 'wide-input-drills'
+        })
+
+
+class DrillNameTextMixin():
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].label = "Име * "
+        self.fields['name'].widget.attrs.update({
+            'placeholder': "пример: 1 срещу 1 на тъча",
+            'class': 'wide-input-drills'
+        })
+
+
+# class OrderFieldsMixin():
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         field_order = []
+#         ordered_fields = {field: self.fields[field] for field in field_order if field in self.fields}
+#         self.fields = ordered_fields
+
 class DrillTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -6,17 +32,6 @@ class DrillTextsMixin():
             ,'description','coaching_points','progression']
         ordered_fields = {field: self.fields[field] for field in field_order if field in self.fields}
         self.fields = ordered_fields
-
-        self.fields['graphics'].label = "Графика "
-        self.fields['graphics'].widget.attrs.update({
-            'class': 'wide-input-drills'
-        })
-
-        self.fields['name'].label = "Име * "
-        self.fields['name'].widget.attrs.update({
-            'placeholder': "пример: 1 срещу 1 на тъча",
-            'class': 'wide-input-drills'
-        })
 
         self.fields['for_age_group'].label = "За възрастова група * "
         self.fields['for_age_group'].widget.attrs.update({

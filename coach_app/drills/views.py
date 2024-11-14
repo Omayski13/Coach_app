@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DeleteView
 
-from coach_app.drills.forms import DrillCreateFrom
+from coach_app.drills.forms import DrillCreateForm, DrillDeleteForm
 from coach_app.drills.models import Drill
 
 
@@ -11,8 +11,8 @@ from coach_app.drills.models import Drill
 
 class DrillCreateView(CreateView):
     template_name = 'drills/drills-create.html'
-    form_class = DrillCreateFrom
-    success_url = reverse_lazy('listing-dashboard')
+    form_class = DrillCreateForm
+    success_url = reverse_lazy('drill-dashboard')
 
     def form_valid(self, form):
         drill = form.save(commit=False)
@@ -52,6 +52,19 @@ class DrillDashboardView(ListView):
 
         context['clean_query_params'] = valid_filters
         return context
+
+
+class DrillDeleteView(DeleteView):
+    template_name = 'drills/drills-delete.html'
+    form_class = DrillDeleteForm
+    model = Drill
+    success_url = reverse_lazy('drill-dashboard')
+
+    def get_initial(self):
+        return self.object.__dict__
+
+    def form_invalid(self, form):
+        return self.form_valid(form)
 
 
 
