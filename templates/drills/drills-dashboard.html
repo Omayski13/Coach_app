@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-drills">
+        <div class="drills">
+            {% for drill in drills %}
+                <div class="drill-card">
+                    <div class="image-wrap">
+                        <!-- car image -->
+                        <img
+                                src="{{ drill.graphics.url }}"
+                                alt="Rally"
+                        />
+                    </div>
+                    <div class="drill-info">
+                        <!-- car type -->
+                        <h1>{{ drill.name }}</h1>
+                        <h4>{{ drill.for_age_group }}</h4>
+                        <h4>{{ drill.focus }}</h4>
+
+                        <!-- car model -->
+                        <p class="description">{{ drill.description|truncatewords:30 }}</p>
+                        <div class="cup-comments">
+                            <p href="#"><i class="fa-solid fa-trophy"></i> 19</p>
+                            <p href="#"><i class="fa-solid fa-comments"></i> 1</p>
+                        </div>
+                        <div class="drill-buttons">
+                            <a class="details-drills" href="#">Разгледай<i class="fa-solid fa-eye"></i></a>
+                            {% if drill.author.pk == request.user.pk %}
+                                <a class="details-drills" href="#">Редактирай<i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="details-drills" href="#">Изтрий<i class="fa-solid fa-trash"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="filters">
+            <div class="filters-box" id="header">
+                <h1>Филтри</h1>
+            </div>
+            <div class="filters-box">
+                <h4>Възрастова група</h4>
+                <ul>
+
+                    <li class="{% if request.GET.for_age_group == 'U5 - U6' %}active{% endif %}">
+                        <a href="?for_age_group=U5 - U6"{{ request.GET.urlencode|safe }}>U5 - U6</a></li>
+                    <li class="{% if request.GET.for_age_group == 'U7 - U8' %}active{% endif %}"><a
+                            href="?for_age_group=U7 - U8"{{ request.GET.urlencode|safe }}>U7 - U8</a></li>
+                    <li class="{% if request.GET.for_age_group == 'U9 - U10' %}active{% endif %}"><a
+                            href="?for_age_group=U9 - U10"{{ request.GET.urlencode|safe }}>U9 - U10</a></li>
+                    <li class="{% if request.GET.for_age_group == 'U11 - U12' %}active{% endif %}"><a
+                            href="?for_age_group=U11 - U12"{{ request.GET.urlencode|safe }}>U11 - U12</a></li>
+                    <li class="{% if request.GET.for_age_group == 'U13 - U14' %}active{% endif %}"><a
+                            href="?for_age_group=U13 - U14{{ request.GET.urlencode|safe }}">U13 - U14</a></li>
+                    <li class="{% if request.GET.for_age_group == 'U15 - U16' %}active{% endif %}"><a
+                            href="?for_age_group=U15 - U16{{ request.GET.urlencode|safe }}">U15 - U16</a></li>
+                    <li class="{% if request.GET.for_age_group == 'U17 - U19' %}active{% endif %}"><a
+                            href="?for_age_group=U17 - U19{{ request.GET.urlencode|safe }}">U17 - U19</a></li>
+                </ul>
+            </div>
+            <div class="filters-box">
+                <h4>Фокус на тренировката</h4>
+                <ul>
+                    <li class="{% if request.GET.focus == 'Удари' %}active{% endif %}">
+                        <a href="?focus=Удари{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">Удари</a>
+                    </li>
+                    <li class="{% if request.GET.focus == 'Подаване' %}active{% endif %}">
+                        <a href="?focus=Подаване{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">Подаване</a>
+                    </li>
+                    <li class="{% if request.GET.focus == 'Дрибъл' %}active{% endif %}">
+                        <a href="?focus=Дрибъл{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">Дрибъл</a>
+                    </li>
+                    <li class="{% if request.GET.focus == '1 срещу 1' %}active{% endif %}">
+                        <a href="?focus=1 срещу 1{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">1 срещу 1</a>
+                    </li>
+                    <li class="{% if request.GET.focus == '2 срещу 1' %}active{% endif %}">
+                        <a href="?focus=2 срещу 1{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">2 срещу 1</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="filters-box" id="clear-filters">
+                <ul>
+                    <li><a href="{% url 'drill-dashboard' %}">Махни филтри</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    </div>
+{% endblock %}

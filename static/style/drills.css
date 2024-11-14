@@ -1,0 +1,183 @@
+div.container-drills{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.drill-card{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    margin-top: 20px;
+    padding: 50px;
+    margin-left: 50px;
+    background-position: right 35% bottom 45%;
+    box-sizing: border-box;
+    float: none;
+    height: auto;
+    width: 85%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.drills{
+    display: inline-block;
+    width: 80%;
+}
+
+.image-wrap {
+    width: 550px;
+    height: 350px;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+
+}
+
+.image-wrap>img {
+    width: 85%;
+    max-width: 100%;
+    height: 100%;
+    justify-content: start;
+}
+
+.filters{
+    width: 15%;
+}
+
+.drill-info{
+    text-align: center;
+    width: 65%;
+}
+
+.drill-info h1{
+    padding-bottom: 0.7em;
+}
+
+.drill-info h4{
+    padding-bottom: 0.5em;
+}
+
+.drill-buttons{
+    /*padding-top: 3em;*/
+    /*font-size: em;*/
+}
+
+
+.description{
+    font-weight:bold;
+}
+
+.details-drills {
+    display: inline-block;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.4em;
+    padding: 0.5em;
+    margin-top: 1em;
+    margin-right:1em;
+    border-radius: 1.5em;
+    cursor: pointer;
+    border: whitesmoke solid 0.1em;
+}
+
+.details-drills i {
+    padding-left: 0.5em;
+}
+
+.cup-comments p{
+    font-size: 1.5em;
+    padding: 0 1.5em;
+}
+
+.cup-comments{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filters {
+    width: 30%;
+}
+
+.filters-box{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    margin-top: 20px;
+    padding: 50px;
+    background-position: right 35% bottom 45%;
+    box-sizing: border-box;
+    float: none;
+    height: auto;
+    width: 85%;
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+}
+
+.filters-box#header{
+    color: whitesmoke;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.filters-box li{
+    display: block;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    margin-right:1em;
+    border-radius: 1.5em;
+    cursor: pointer;
+    border: whitesmoke solid 0.1em;
+}
+
+.filters-box ul li a {
+    text-decoration: none; /* Removes underline */
+    color: whitesmoke; /* Default color */
+}
+
+.filters-box ul li.active a {
+    text-decoration: underline; /* Add underline for active filter */
+    color: black; /* Change to a highlight color (e.g., blue) */
+}
+.filters-box h4 {
+    color: whitesmoke;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 0.7em;
+}
+
+.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.filters-box#clear-filtert{
+    color: whitesmoke;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.filters-box#clear-filters {
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+

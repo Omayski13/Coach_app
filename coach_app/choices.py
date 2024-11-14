@@ -28,5 +28,5 @@ class FocusChoices(models.TextChoices):
     PASSING = 'Подаване','Подаване'
     DRIBBLING = 'Дрибъл','Дрибъл'
     POSSESSION = 'Владение','Владение'
-    ONE_VS_ONE = '1 срещу 1','1 срещу 1'
+    ONE_VS_ONE = '1 срещу 1','1 срещу 1',
     TWO_VS_ONE = '2 срещу 1','2 срещу 1'
