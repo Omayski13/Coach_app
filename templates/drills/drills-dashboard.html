@@ -27,7 +27,8 @@
                         <div class="drill-buttons">
                             <a class="details-drills" href="#">Разгледай<i class="fa-solid fa-eye"></i></a>
                             {% if drill.author.pk == request.user.pk %}
-                                <a class="details-drills" href="#"><i id="drills-edit" class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="details-drills" href="{% url 'drill-edit' drill.pk %}"><i 
+                                        id="drills-edit" class="fa-solid fa-pen-to-square"></i></a>
                                 <a class="details-drills" href="{% url 'drill-delete' drill.pk %}"><i
                                         id="drills-delete" class="fa-solid fa-trash"></i></a>
                             {% endif %}
