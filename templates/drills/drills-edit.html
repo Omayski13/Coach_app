@@ -5,8 +5,9 @@
         <section id="create-user">
             <form class="form-group" method="post" enctype="multipart/form-data">
                 <div class="details-container">
-{#                    <h1 class="listing-edit">Обява номер: {{ drill.pk }}</h1>#}
-                    <img src="{{ drill.graphics.url }}" style="height: 350px;width: 370px">
+                    {% if drill.graphics %}
+                        <img src="{{ drill.graphics.url }}" style="height: 350px;width: 370px">
+                    {% endif %}
                     {% csrf_token %}
                     {{form}}
                     <button>Редакция</button>
