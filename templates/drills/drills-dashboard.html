@@ -25,7 +25,8 @@
                             <p href="#"><i class="fa-solid fa-comments"></i> 1</p>
                         </div>
                         <div class="drill-buttons">
-                            <a class="details-drills" href="#">Разгледай<i class="fa-solid fa-eye"></i></a>
+                            <a class="details-drills" href="{% url 'drill-details' drill.pk %}">Разгледай<i 
+                                    class="fa-solid fa-eye"></i></a>
                             {% if drill.author.pk == request.user.pk %}
                                 <a class="details-drills" href="{% url 'drill-edit' drill.pk %}"><i 
                                         id="drills-edit" class="fa-solid fa-pen-to-square"></i></a>
