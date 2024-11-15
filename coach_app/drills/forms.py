@@ -16,7 +16,7 @@ class DrillCreateForm(DrillGraphicsTextsMixin,DrillNameTextMixin,BaseDrillForm):
     pass
 
 
-class DrillEditForm(BaseDrillForm):
+class DrillEditForm(DrillGraphicsTextsMixin,DrillNameTextMixin,BaseDrillForm):
     pass
 
 
