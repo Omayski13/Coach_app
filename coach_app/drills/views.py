@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView, FormView
 
+from coach_app.comments.forms import CommentAddForm
 from coach_app.drills.forms import DrillCreateForm, DrillDeleteForm, DrillEditForm
 from coach_app.drills.models import Drill
 
@@ -57,6 +58,25 @@ class DrillDetailsView(DetailView):
     template_name = 'drills/drills-details.html'
     model = Drill
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['comment_form'] = CommentAddForm()
+        context['comments'] = self.object.comments.all()
+
+        return context
+
+    def post(self, request,  *args, **kwargs):
+        self.object = self.get_object()
+        form = CommentAddForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.to_drill_id = self.object.id
+            comment.author = request.user
+            comment.save()
+
+            return redirect('drill-details', pk=self.object.pk)
 
 
 

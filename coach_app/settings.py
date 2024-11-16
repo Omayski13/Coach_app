@@ -47,10 +47,9 @@ INSTALLED_APPS = [
     'coach_app.accounts',
     'coach_app.listings',
     'coach_app.drills',
+    'coach_app.comments',
 ]
 
-
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
