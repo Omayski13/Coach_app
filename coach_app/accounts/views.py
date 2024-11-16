@@ -11,7 +11,7 @@ from coach_app.accounts.models import AppUser, Profile
 
 class UserRegisterVIew(CreateView):
     form_class = AppUserCreationForm
-    template_name = 'accounts/register.html'
+    template_name = 'accounts/accounts-register.html'
     success_url = reverse_lazy('home-page')
 
 

@@ -8,9 +8,10 @@ from coach_app.accounts.mixins import UserNameTextsMixin, EmailTextsMixin, Pass1
     UserNameOrEmailTextsMixin, FirstNameTextsMixin, LastNameTextsMixin, ClubTextsMixin, LicenseTextsMixin, \
     UsernameCleanMethiodMixin
 from coach_app.accounts.models import AppUser, Profile
+from coach_app.common.mixins import AddAsterixToRequired
 
 
-class AppUserCreationForm(UserNameTextsMixin,UsernameCleanMethiodMixin, EmailTextsMixin,Pass12TextsMixin,UserCreationForm):
+class AppUserCreationForm(AddAsterixToRequired,UserNameTextsMixin,UsernameCleanMethiodMixin, EmailTextsMixin,Pass12TextsMixin,UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ['username', 'email',]
