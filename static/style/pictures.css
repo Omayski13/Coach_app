@@ -5,6 +5,5 @@
     border: darkslategrey 5px solid;
     object-fit: cover;  /* Ensure the image is cropped and fits the container */
     margin-bottom: 2.5em;
-
 }
 

@@ -5,46 +5,88 @@
         <section id="create-user">
             <form class="form-group" method="post">
                 <div class="details-container">
-                
-                    <h1 class="listing-details"> {{ drill.name }}</h1>
+
+                    {% if drill.approved %}
+                        <h1 class="listings-details">{{ drill.name }} <i class="fa-regular fa-circle-check"
+                                                                      style="color: whitesmoke;"></i></h1>
+                    {% else %}
+                        <h1>{{ drill.name }}</h1>
+                    {% endif %}
                     {% if drill.graphics %}
                         <img src="{{ drill.graphics.url }}" style="height: 350px;width: 370px">
-                        {% else %}
+                    {% else %}
                         <img src="{% static 'images/drills-common.png' %}" style="height: 350px;width: 370px">
                     {% endif %}
-                
-                    <h1 class="listing-details">Детайли</h1>
-                    <h2 class="details"><span class="details-text"> Отбор:</span> <strong>{{ listing.club }}</strong>
+
+                    {#                    <h1 class="listing-details">Детайли</h1>#}
+                    <h2 class="drill-details"><span class="details-text"> Възрастова група :</span></h2>
+                    <h2 class="details"><span class="details-text"> </span> <strong>{{ drill.for_age_group }}</strong>
                     </h2>
-                    {% if listing.for_age_group %}
-                        <h2 class="details"><span class="details-text"> Възраст:</span>
-                            <strong>{{ listing.for_age_group }}</strong></h2>
-                    {% endif %}
-                    {% if listing.salary %}
-                        <h2 class="details"><span class="details-text"> Заплата:</span>
-                            <strong>{{ listing.salary }}</strong></h2>
-                    {% endif %}
-                
-                    <h1 class="listing-details">Изисквания </h1>
-                    <h2 class="details"><span class="details-text"> Необходим лиценз:</span>
-                        <strong>{{ listing.licence_required }}</strong></h2>
-                    {% if listing.experience_needed %}
-                    <h2 class="details"><span class="details-text"> Необходим опит:</span>
-                        <strong>{{ listing.experience_needed }} години</strong></h2>
-                        {% else %}
-                        <h2 class="details"><span class="details-text"> Необходим опит:</span>
-                        <strong>Не е нужен опит</strong></h2>
-                    {% endif %}
-                
-                    <h1 class="listing-details">Контакти</h1>
-                    <h2 class="details"><span class="details-text"> Телефон:</span>
-                        <strong>{{ listing.telephone_number }}</strong></h2>
-                    <h2 class="details"><span class="details-text"> Лице за контакт:</span>
-                        <strong>{{ listing.contact_person }}</strong></h2>
-                    {% if listing.position %}
-                        <h2 class="details"><span class="details-text"> Позиция:</span>
-                        <strong>{{ listing.position }}</strong></h2>
-                    {% endif %}
+                    <h2 class="drill-details"><span class="details-text"> Фокус :</span></h2>
+                    <h2 class="details"><span class="details-text"> </span> <strong>{{ drill.focus }}</strong></h2>
+                    <h2 class="drill-details"><span class="details-text"> Цели :</span></h2>
+                    <h2 class="details"><span class="details-text"> </span> <strong>{{ drill.objectives }}</strong></h2>
+                    <h2 class="drill-details"><span class="details-text"> Размери :</span></h2>
+                    <h2 class="details"><span class="details-text"> </span> <strong>{{ drill.dimensions }}</strong></h2>
+                    <h2 class="drill-details"><span class="details-text"> Серии :</span></h2>
+                    <h2 class="details"><span class="details-text"> </span> <strong>{{ drill.series }}</strong>
+                        {% if drill.duration %}
+                            <h2 class="drill-details"><span class="details-text"> Общо времетраене :</span>
+                            </h2>
+                            <h2 class="details"><span class="details-text"> </span>
+                                <strong>{{ drill.duration }}</strong></h2>
+                        {% endif %}
+                        {% if drill.coaching_points %}
+                            <h2 class="drill-details"><span class="details-text"> Треньорски цели :</span></h2>
+                            <h2 class="details"><span class="details-text"> </span>
+                                <strong>{{ drill.coaching_points }}</strong></h2>
+                        {% endif %}
+                        <h2 class="drill-details"><span class="details-text"> Описание :</span></h2>
+                        <p class="details"><span class="details-text"> </span>
+                            <strong>{{ drill.description }}</strong></p>
+                        {% if drill.progression %}
+                            <h2 class="drill-details"><span class="details-text"> Прогресия :</span></h2>
+                            <h2 class="details"><span class="details-text"> </span>
+                                <strong>{{ drill.progression }}</strong></h2>
+                        {% endif %}
+
+
+                        {#                        <h2 class="details"><span class="details-text"> Фокус:</span>#}
+                        {#                            <strong>{{ drill.focus }}</strong>#}
+                        {#                            <h2 class="details"><span class="details-text"> Цели:</span>#}
+                        {#                                <strong>{{ drill.objectives }}</strong>#}
+                        {#                                <h2 class="details"><span class="details-text"> Възрастова група:</span>#}
+                        {#                                    <strong>{{ drill.for_age_group }}</strong>#}
+                        {#                                </h2>#}
+                        {#                                {% if listing.for_age_group %}#}
+                        {#                                    <h2 class="details"><span class="details-text"> Възраст:</span>#}
+                        {#                                        <strong>{{ listing.for_age_group }}</strong></h2>#}
+                        {#                                {% endif %}#}
+                        {#                                {% if listing.salary %}#}
+                        {#                                    <h2 class="details"><span class="details-text"> Заплата:</span>#}
+                        {#                                        <strong>{{ listing.salary }}</strong></h2>#}
+                        {#                                {% endif %}#}
+
+                        {#                        <h1 class="listing-details">Изисквания </h1>#}
+                        {#                        <h2 class="details"><span class="details-text"> Необходим лиценз:</span>#}
+                        {#                            <strong>{{ listing.licence_required }}</strong></h2>#}
+                        {#                        {% if listing.experience_needed %}#}
+                        {#                            <h2 class="details"><span class="details-text"> Необходим опит:</span>#}
+                        {#                                <strong>{{ listing.experience_needed }} години</strong></h2>#}
+                        {#                        {% else %}#}
+                        {#                            <h2 class="details"><span class="details-text"> Необходим опит:</span>#}
+                        {#                                <strong>Не е нужен опит</strong></h2>#}
+                        {#                        {% endif %}#}
+                        {##}
+                        {#                        <h1 class="listing-details">Контакти</h1>#}
+                        {#                        <h2 class="details"><span class="details-text"> Телефон:</span>#}
+                        {#                            <strong>{{ listing.telephone_number }}</strong></h2>#}
+                        {#                        <h2 class="details"><span class="details-text"> Лице за контакт:</span>#}
+                        {#                            <strong>{{ listing.contact_person }}</strong></h2>#}
+                        {#                        {% if listing.position %}#}
+                        {#                            <h2 class="details"><span class="details-text"> Позиция:</span>#}
+                        {#                                <strong>{{ listing.position }}</strong></h2>#}
+                        {#                        {% endif %}#}
                 </div>
             </form>
         </section>

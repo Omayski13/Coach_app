@@ -26,9 +26,9 @@ h2.details{
     padding-bottom: 0.2em;
 }
 
-.listing-details{
+.drill-details{
     color: green;
-    padding-bottom: 0.2em;
+        margin-bottom: .01rem;
 }
 
 h1.details{

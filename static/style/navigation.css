@@ -23,42 +23,21 @@ nav{
     justify-content: start;
 }
 
-
-
-
-
-
 nav a {
        text-decoration: none
 }
 
-
-
-
-.nav-profile{
-
-}
-
-
 .nav-other a {
     padding: 0.4em;
-
 }
-
 
 .nav-profile a {
     padding: 0.4em;
-
 }
 
 nav a{
     color: whitesmoke;
     /*color: red;*/
-}
-
-main {
-
-
 }
 
 footer {

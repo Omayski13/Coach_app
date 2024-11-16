@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 class UserNameTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['username'].required = True
         self.fields['username'].label = "Потребителско име"
         self.fields['username'].help_text = ""
         self.fields['username'].widget.attrs.update({
@@ -28,6 +30,8 @@ class UsernameCleanMethiodMixin():
 class UserNameOrEmailTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['username'].required = True
         self.fields['username'].label = "Потр. име или имейл"
         self.fields['username'].help_text = ""
         self.fields['username'].widget.attrs.update({
@@ -40,6 +44,8 @@ class PasswordTextsMixin():
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['password'].required = True
         self.fields['password'].label = "Парола"
         self.fields['password'].widget.attrs.update({
             'placeholder': "Въведи парола...",
@@ -50,6 +56,8 @@ class PasswordTextsMixin():
 class EmailTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['email'].required = True
         self.fields['email'].label = "Имейл"
         self.fields['email'].widget.attrs.update({
             'placeholder': "Въведи валиден имейл...",
@@ -71,6 +79,8 @@ class EmailTextsMixin():
 class Pass12TextsMixin():
    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['password1'].required = True
         self.fields['password1'].help_text = "Паролата не може да бъда само цифри и трябва да бъде поне 8 символа"
         self.fields['password1'].label = "Парола"
         self.fields['password1'].widget.attrs.update({
@@ -78,6 +88,7 @@ class Pass12TextsMixin():
             'class': 'wide-input'
         })
 
+        self.fields['password2'].required = True
         self.fields['password2'].help_text = ""
         self.fields['password2'].label = "Потвърди парола"
         self.fields['password2'].widget.attrs.update({

@@ -60,5 +60,9 @@ class Drill(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
         related_name='drills'
     )
 
+    approved = models.BooleanField(
+        default=False,
+    )
+
 
 
