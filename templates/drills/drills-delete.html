@@ -5,7 +5,11 @@
         <section id="create-user">
             <form class="form-group" method="post" enctype="multipart/form-data">
                 <div class="details-container">
-                    <h1 class="listing-delete">{{ drill.name }}</h1>
+                    {% if drill.approved %}
+                            <h1 class="listings-delete">{{ drill.name }} <i class="fa-regular fa-circle-check" style="color: whitesmoke;"></i></h1>
+                        {% else %}
+                            <h1>{{ drill.name }}</h1>
+                        {% endif %}
                     {% if drill.graphics %}
                         <img src="{{ drill.graphics.url}}" style="width: 420px; height: 320px">
                     {% endif %}

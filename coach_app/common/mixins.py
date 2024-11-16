@@ -10,6 +10,16 @@ class DisableFieldsMixin():
             field.widget.attrs['disabled'] = 'disabled'
 
 
+
+class AddAsterixToRequired():
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        for field in self.fields.values():
+            if field.required:
+                field.label = f"{field.label} * "
+
+
+
 class CreatedAtMixin(models.Model):
     created_at = models.DateTimeField(
         auto_now=True,

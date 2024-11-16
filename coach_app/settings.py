@@ -41,12 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'bootstrap5',
+    'crispy_forms',
 
     'coach_app.common',
     'coach_app.accounts',
     'coach_app.listings',
     'coach_app.drills',
 ]
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

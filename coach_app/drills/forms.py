@@ -1,14 +1,14 @@
 from django import forms
 
-from coach_app.common.mixins import DisableFieldsMixin
+from coach_app.common.mixins import DisableFieldsMixin, AddAsterixToRequired
 from coach_app.drills.mixins import DrillTextsMixin, DrillNameTextMixin, DrillGraphicsTextsMixin
 from coach_app.drills.models import Drill
 
 
-class BaseDrillForm(DrillTextsMixin,forms.ModelForm):
+class BaseDrillForm(AddAsterixToRequired,DrillTextsMixin,forms.ModelForm):
     class Meta:
         model = Drill
-        exclude = ('author','created_at','updated_at')
+        exclude = ('author','created_at','updated_at', 'approved')
 
 
 
