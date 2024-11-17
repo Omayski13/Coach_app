@@ -28,30 +28,23 @@ class DrillDashboardView(ListView):
     def get_queryset(self):
         queryset = Drill.objects.all()
 
-        # Get query parameters
         for_age_group = self.request.GET.get('for_age_group')
         focus = self.request.GET.get('focus')
+        approved = self.request.GET.get('approved')
 
-        # Apply filters
         if for_age_group:
             queryset = queryset.filter(for_age_group=for_age_group)
         if focus:
             queryset = queryset.filter(focus=focus)
+        if approved == 'True':
+            queryset = queryset.filter(approved=True)
 
         return queryset.order_by('-created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        query_params = self.request.GET.dict()
-
-        valid_filters = {}
-        if 'age_group' in query_params:
-            valid_filters['age_group'] = query_params['age_group']
-        if 'focus' in query_params:
-            valid_filters['focus'] = query_params['focus']
-
-        context['clean_query_params'] = valid_filters
+        context['age_groups'] = ['U5 - U6', 'U7 - U8', 'U9 - U10', 'U11 - U12', 'U13 - U14', 'U15 - U16', 'U17 - U19']
+        context['focus_options'] = ['Удари', 'Подаване', 'Дрибъл', '1 срещу 1', '2 срещу 1']
         return context
 
 class DrillDetailsView(DetailView):

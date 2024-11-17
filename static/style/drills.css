@@ -88,6 +88,11 @@ div.container-drills{
     border: whitesmoke solid 0.1em;
 }
 
+.details-drills:hover {
+    background-color: whitesmoke;
+    color: black; /* Invert colors on hover */
+}
+
 .details-drills i {
     padding-left: 0.2em;
 }
@@ -119,7 +124,7 @@ div.container-drills{
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
     margin-top: 20px;
-    padding: 50px;
+    padding: 20px;
     background-position: right 35% bottom 45%;
     box-sizing: border-box;
     float: none;
@@ -182,6 +187,45 @@ div.container-drills{
     color: whitesmoke;
     text-decoration: none;
     font-size: 1.5em;
+}
+
+.no-drills-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    min-height: 50vh; /* Optional: Adjust height to position vertically */
+    text-align: center; /* Center text in block-level elements */
+    /*background-color: #333; !* Optional: Add a background color for better visibility *!*/
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    margin: 5em;
+}
+
+.no-drills {
+    color: black;
+    margin-bottom: 1em; /* Add space between the <h1> and the link */
+}
+
+.no-drills-link {
+    color: whitesmoke;
+    background-color: darkslategrey;
+
+    text-decoration: none;
+    font-size: 1.2em; /* Adjust font size if needed */
+    padding: 0.5em 1em;
+    border: 1px solid whitesmoke; /* Optional: Add a border for styling */
+    border-radius: 1.5em; /* Optional: Add rounded corners */
+    transition: background-color 0.3s ease; /* Optional: Add hover effect */
+}
+
+.no-drills-link:hover {
+    background-color: whitesmoke;
+    color: black; /* Invert colors on hover */
 }
 
 

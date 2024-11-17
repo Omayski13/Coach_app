@@ -29,6 +29,11 @@ form button{
     border-color: whitesmoke;
 }
 
+button:hover {
+    background-color: whitesmoke;
+    color: black; /* Invert colors on hover */
+}
+
 form p{
     font-size:1.2em;
 }
