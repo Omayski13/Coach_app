@@ -12,7 +12,7 @@ class Comment(CreatedAtMixin):
         indexes = [
             models.Index(fields=['created_at']),
         ]
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     to_drill = models.ForeignKey(
         to=Drill,
