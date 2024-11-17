@@ -14,7 +14,8 @@
                     </div>
                     <div class="drill-info">
                         {% if drill.approved %}
-                            <h1>{{ drill.name }} <i class="fa-regular fa-circle-check" style="color: darkslategrey;"></i></h1>
+                            <h1>{{ drill.name }} <i class="fa-regular fa-circle-check"
+                                                    style="color: darkslategrey;"></i></h1>
                         {% else %}
                             <h1>{{ drill.name }}</h1>
                         {% endif %}
@@ -38,8 +39,13 @@
                             {% endif %}
                         </div>
                     </div>
-
                 </div>
+            {% empty %}
+                <div class="no-drills-container">
+                    <h1 class="no-drills">Няма добавени тренировки по зададените филтри</h1>
+                    <a class="no-drills-link" href="{% url 'drill-dashboard' %}">Махни филтри</a>
+                </div>
+
             {% endfor %}
 
         </div>
@@ -47,55 +53,65 @@
             <div class="filters-box" id="header">
                 <h1>Филтри</h1>
             </div>
+
+            <div class="filters-box">
+                <h4>Тренировки</h4>
+                <ul>
+                    <li class="{% if request.GET.approved == 'True' %}active{% endif %}">
+                        <a href="?
+                                
+                                {% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=True">
+                            Само одобрени
+                        </a>
+                    </li>
+                    <li class="{% if request.GET.approved == 'False' or request.GET.approved is None %}active{% endif %}">
+                        <a href="?
+                                
+                                {% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=False">
+                            Всички тренировки
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <div class="filters-box">
                 <h4>Възрастова група</h4>
                 <ul>
-
-                    <li class="{% if request.GET.for_age_group == 'U5 - U6' %}active{% endif %}">
-                        <a href="?for_age_group=U5 - U6"{{ request.GET.urlencode|safe }}>U5 - U6</a></li>
-                    <li class="{% if request.GET.for_age_group == 'U7 - U8' %}active{% endif %}"><a
-                            href="?for_age_group=U7 - U8"{{ request.GET.urlencode|safe }}>U7 - U8</a></li>
-                    <li class="{% if request.GET.for_age_group == 'U9 - U10' %}active{% endif %}"><a
-                            href="?for_age_group=U9 - U10"{{ request.GET.urlencode|safe }}>U9 - U10</a></li>
-                    <li class="{% if request.GET.for_age_group == 'U11 - U12' %}active{% endif %}"><a
-                            href="?for_age_group=U11 - U12"{{ request.GET.urlencode|safe }}>U11 - U12</a></li>
-                    <li class="{% if request.GET.for_age_group == 'U13 - U14' %}active{% endif %}"><a
-                            href="?for_age_group=U13 - U14{{ request.GET.urlencode|safe }}">U13 - U14</a></li>
-                    <li class="{% if request.GET.for_age_group == 'U15 - U16' %}active{% endif %}"><a
-                            href="?for_age_group=U15 - U16{{ request.GET.urlencode|safe }}">U15 - U16</a></li>
-                    <li class="{% if request.GET.for_age_group == 'U17 - U19' %}active{% endif %}"><a
-                            href="?for_age_group=U17 - U19{{ request.GET.urlencode|safe }}">U17 - U19</a></li>
+                    {% for group in age_groups %}
+                        <li class="{% if request.GET.for_age_group == group %}active{% endif %}">
+                            <a href="?
+                                    
+                                    {% for key, value in request.GET.items %}{% if key != 'for_age_group' %}{{ key }}={{ value }}&{% endif %}{% endfor %}for_age_group={{ group }}">
+                                {{ group }}
+                            </a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
+
             <div class="filters-box">
                 <h4>Фокус на тренировката</h4>
                 <ul>
-                    <li class="{% if request.GET.focus == 'Удари' %}active{% endif %}">
-                        <a href="?focus=Удари{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">Удари</a>
-                    </li>
-                    <li class="{% if request.GET.focus == 'Подаване' %}active{% endif %}">
-                        <a href="?focus=Подаване{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">Подаване</a>
-                    </li>
-                    <li class="{% if request.GET.focus == 'Дрибъл' %}active{% endif %}">
-                        <a href="?focus=Дрибъл{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">Дрибъл</a>
-                    </li>
-                    <li class="{% if request.GET.focus == '1 срещу 1' %}active{% endif %}">
-                        <a href="?focus=1 срещу 1{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">1
-                            срещу 1</a>
-                    </li>
-                    <li class="{% if request.GET.focus == '2 срещу 1' %}active{% endif %}">
-                        <a href="?focus=2 срещу 1{% if 'age_group' in clean_query_params %}&age_group={{ clean_query_params.age_group }}{% endif %}">2
-                            срещу 1</a>
-                    </li>
+                    {% for focus_option in focus_options %}
+                        <li class="{% if request.GET.focus == focus_option %}active{% endif %}">
+                            <a href="?
+                                    
+                                    {% for key, value in request.GET.items %}{% if key != 'focus' %}{{ key }}={{ value }}&{% endif %}{% endfor %}focus={{ focus_option }}">
+                                {{ focus_option }}
+                            </a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
+
             <div class="filters-box" id="clear-filters">
                 <ul>
                     <li><a href="{% url 'drill-dashboard' %}">Махни филтри</a></li>
                 </ul>
             </div>
-
         </div>
+
+    </div>
     </div>
     </div>
 {% endblock %}

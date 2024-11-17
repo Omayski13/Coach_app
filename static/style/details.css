@@ -11,7 +11,11 @@
     border-radius: 1.5em;
     cursor: pointer;
     border: whitesmoke solid 0.1em;
+}
 
+.details-link:hover {
+    background-color: whitesmoke;
+    color: black; /* Invert colors on hover */
 }
 
 a:hover{
