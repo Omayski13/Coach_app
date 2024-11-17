@@ -57,13 +57,18 @@
     <section id="create-user">
     <h1>Коментари</h1>
         {% for comment in comments %}
-            <h6 style="color: green">{{ comment.author }}</h6>
-            <p> {{ comment.content }} </p>
+            <div class="comment-card">
+                <div class="comment-header">
+                    <h6><a href="{% url 'user-details' comment.author.pk %}"> {{ comment.author }}</a></h6>
+                    <p>{{ comment.created_at|date:"d.m.Y H:i" }}</p>
+                </div>
+                <p> {{ comment.content }} </p>
+            </div>
         {% endfor %}
-        <form method="post">
+        <form class="comments" method="post">
             {% csrf_token %}
             {{ comment_form }}
-            <button> comment</button>
+            <button>Добави</button>
         </form>
     </section>>
 {% endblock %}

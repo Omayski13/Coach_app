@@ -53,9 +53,7 @@ input
 .wide-input {
     width: 300px; /* Adjust the width as needed */
 }
-.wide-input-drills {
-    width: 420px; /* Adjust the width as needed */
-}
+
 
 label{
     font-size:1.2em ;
