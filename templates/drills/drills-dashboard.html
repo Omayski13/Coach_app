@@ -25,8 +25,19 @@
                         <!-- car model -->
                         <p class="description">{{ drill.description|truncatewords:30 }}</p>
                         <div class="cup-comments">
-                            <p href="#"><i class="fa-solid fa-trophy"></i> 19</p>
-                            <p href="#"><i class="fa-solid fa-comments"></i> 1</p>
+{#                            <a style="text-decoration: none" href="{% url 'like' drill.pk %}">#}
+                                {% if drill.has_liked %}
+                                    <a class="like-link" href="{% url 'like' drill.pk %}"><p>"><i id="unlike" class="fa-solid fa-trophy liked-icon"></i> 19</p></a>
+                                {% else %}
+                                    <a class="like-link" href="{% url 'like' drill.pk %}"><p><i id="like"  class="fa-solid fa-trophy not-liked-icon"></i> 18</p></a>
+                                {% endif %}
+                            </a>
+                            
+                            {% if drill.comments.count >= 1 %}
+                                <p href="#"><i style="color: blue" class="fa-solid fa-comments"></i> {{ drill.comments.count }}</p>
+                            {% else %}
+                                <p href="#"><i class="fa-solid fa-comments"></i> {{ drill.comments.count }}</p>
+                            {% endif %}
                         </div>
                         <div class="drill-buttons">
                             <a class="details-drills" href="{% url 'drill-details' drill.pk %}">Разгледай<i
