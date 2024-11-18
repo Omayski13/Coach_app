@@ -24,6 +24,7 @@ class DrillCreateView(CreateView):
 class DrillDashboardView(ListView):
     template_name = 'drills/drills-dashboard.html'
     context_object_name = 'drills'
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = Drill.objects.all()
@@ -40,6 +41,8 @@ class DrillDashboardView(ListView):
             queryset = queryset.filter(approved=True)
 
         return queryset.order_by('-created_at')
+
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
