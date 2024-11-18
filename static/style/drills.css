@@ -7,6 +7,10 @@ div.container-drills{
     width: 420px;
 }
 
+.drill-header{
+    padding-bottom: 0.3em;
+}
+
 .drill-card{
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(5px);
@@ -40,6 +44,34 @@ div.container-drills{
     position: relative;
     text-align: center;
 
+}
+
+.drill-author-date p{
+    margin-bottom: 0.2em;
+}
+.drill-author-date{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0.5em;
+}
+
+.drill-author-date .author{
+    display: inline-block;
+}
+
+.author-details a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.author-details a:hover{
+    color: darkgreen;
+}
+
+
+
+.author-details{
+    display: flex;
 }
 
 .image-wrap>img {

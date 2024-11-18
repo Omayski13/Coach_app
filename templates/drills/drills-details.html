@@ -7,11 +7,28 @@
                 <div class="details-container">
 
                     {% if drill.approved %}
-                        <h1 class="listings-details">{{ drill.name }} <i class="fa-regular fa-circle-check"
+                        <h1 class="drill-header">{{ drill.name }} <i class="fa-regular fa-circle-check"
                                                                          style="color: whitesmoke;"></i></h1>
                     {% else %}
-                        <h1>{{ drill.name }}</h1>
+                        <h1 class="drill-header">{{ drill.name }}</h1>
                     {% endif %}
+                    <div class="drill-author-date">
+                        <div class="author">
+                            <p>Добавена от:</p>
+                            <div class="author-details">
+                                <a href="{% url 'user-details' drill.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{{ drill.author.profile.profile_picture.url }}"></a>
+                                <h5><a href="{% url 'user-details' drill.author.pk %}">{{ drill.author.username }}</a></h5></a>
+                            </div>
+                            
+                        </div>
+                        <div class="date">
+                            <p>Добавена на:</p>
+                            <h5>{{ drill.created_at|date:"d.m.Y H:i" }}</h5>
+                            
+                        </div>
+                        
+                        
+                    </div>
                     {% if drill.graphics %}
                         <img src="{{ drill.graphics.url }}" style="height: 350px;width: 370px">
                     {% else %}
