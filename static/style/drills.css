@@ -275,13 +275,20 @@ div.comment-card{
 
 .comment-header{
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
-div.comment-card h6,
+.comment-header img{
+    margin: 0.5em 0.5em 0 1.8em;
+}
+
+div.comment-card h6{
+    padding: 0.5em 1.4em 0 0;
+}
 div.comment-header p{
     padding: 0.5em 1.4em 0 1.4em;
     /*padding-top: 0.5em;*/
+    margin-left: 4em;
 }
 
 div.comment-card h6{
@@ -326,7 +333,10 @@ div.comment-card p{
 .comments button{
     font-size: 1.5em;
     margin-top: 0.5em;
+}
 
-
+.author{
+    display: flex;
+    justify-content: left;
 }
 
