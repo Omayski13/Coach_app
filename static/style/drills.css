@@ -105,10 +105,12 @@ div.container-drills{
 
 .liked-icon {
     color: goldenrod;
+    padding-right: 0.2em
 }
 
 .not-liked-icon {
     color: black;
+    padding-right: 0.2em
 }
 
 /* Hover effects */
