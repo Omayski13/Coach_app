@@ -46,6 +46,9 @@ class DrillDashboardView(ListView):
         context['age_groups'] = ['U5 - U6', 'U7 - U8', 'U9 - U10', 'U11 - U12', 'U13 - U14', 'U15 - U16', 'U17 - U19']
         context['focus_options'] = ['Удари', 'Подаване', 'Дрибъл', '1 срещу 1', '2 срещу 1']
 
+        for drill in context['drills']:
+            drill.has_liked = drill.likes.filter(user=self.request.user).exists()
+
 
         return context
 

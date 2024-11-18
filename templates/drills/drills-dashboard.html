@@ -27,9 +27,9 @@
                         <div class="cup-comments">
 {#                            <a style="text-decoration: none" href="{% url 'like' drill.pk %}">#}
                                 {% if drill.has_liked %}
-                                    <a class="like-link" href="{% url 'like' drill.pk %}"><p>"><i id="unlike" class="fa-solid fa-trophy liked-icon"></i> 19</p></a>
+                                    <a class="like-link" href="{% url 'like' drill.pk %}"><p><i id="unlike" class="fa-solid fa-trophy liked-icon"></i>{{ drill.likes.count }}</p></a>
                                 {% else %}
-                                    <a class="like-link" href="{% url 'like' drill.pk %}"><p><i id="like"  class="fa-solid fa-trophy not-liked-icon"></i> 18</p></a>
+                                    <a class="like-link" href="{% url 'like' drill.pk %}"><p><i id="like"  class="fa-solid fa-trophy not-liked-icon"></i>{{ drill.likes.count }}</p></a>
                                 {% endif %}
                             </a>
                             
