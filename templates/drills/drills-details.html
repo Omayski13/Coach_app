@@ -30,7 +30,7 @@
                     <h2 class="details"><span class="details-text"> </span> <strong>{{ drill.dimensions }}</strong></h2>
                     <h2 class="drill-details"><span class="details-text"> Серии :</span></h2>
                     <h2 class="details"><span class="details-text"> </span> <strong>{{ drill.series }}</strong>
-                        {% if drill.duration %}
+                        {% if drill.duration %} </h2>
                             <h2 class="drill-details"><span class="details-text"> Общо времетраене :</span>
                             </h2>
                             <h2 class="details"><span class="details-text"> </span>
@@ -54,7 +54,7 @@
         </section>
     </div>
     <p> basi picha</p>
-    <section id="create-user">
+    <section >
     <h1>Коментари</h1>
         {% for comment in comments %}
             <div class="comment-card">
@@ -65,7 +65,7 @@
                 <p> {{ comment.content }} </p>
             </div>
         {% endfor %}
-        <form class="comments" method="post">
+        <form class="comments" id="comments" method="post">
             {% csrf_token %}
             {{ comment_form }}
             <button>Добави</button>

@@ -94,7 +94,43 @@ div.container-drills{
     padding: 0.2em;
 }
 
-.cup-comments p{
+
+.like-link {
+    text-decoration: none;
+}
+
+.like-link p{
+    color: black;
+}
+
+.liked-icon {
+    color: goldenrod;
+}
+
+.not-liked-icon {
+    color: black;
+}
+
+/* Hover effects */
+.liked-icon:hover {
+    color: black; /* Inverse hover effect */
+}
+
+.unliked-icon:hover {
+    color: goldenrod; /* Inverse hover effect */
+}
+
+.cup-comments i#like:hover {
+    color: goldenrod;
+}
+
+.cup-comments i#unlike:hover {
+    color: black;
+}
+
+
+
+.cup-comments p {
     font-size: 1.5em;
     padding: 0 1.5em;
 }

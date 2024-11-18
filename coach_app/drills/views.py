@@ -45,6 +45,8 @@ class DrillDashboardView(ListView):
         context = super().get_context_data(**kwargs)
         context['age_groups'] = ['U5 - U6', 'U7 - U8', 'U9 - U10', 'U11 - U12', 'U13 - U14', 'U15 - U16', 'U17 - U19']
         context['focus_options'] = ['Удари', 'Подаване', 'Дрибъл', '1 срещу 1', '2 срещу 1']
+
+
         return context
 
 class DrillDetailsView(DetailView):
@@ -56,6 +58,8 @@ class DrillDetailsView(DetailView):
 
         context['comment_form'] = CommentAddForm()
         context['comments'] = self.object.comments.all()
+        context['likes'] = self.object.likes.all()
+        self.object.has_liked = self.object.likes.filter(user=self.request.user).exists()
 
         return context
 
@@ -69,7 +73,7 @@ class DrillDetailsView(DetailView):
             comment.author = request.user
             comment.save()
 
-            return redirect('drill-details', pk=self.object.pk)
+            return redirect(f'{self.request.path}#comments')
 
 
 
