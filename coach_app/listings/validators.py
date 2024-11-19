@@ -14,7 +14,7 @@ class TelephoneValidator:
     @message.setter
     def message(self, value):
         if value is None:
-            self.__message = 'Полете трябва да бъде между 10 и 13 символа'
+            self.__message = 'Teлефонният номер трябва да бъде между 10 и 13 цифри'
         else:
             self.__message = value
 
