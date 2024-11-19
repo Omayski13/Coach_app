@@ -96,6 +96,34 @@ class Pass12TextsMixin():
             'class': 'wide-input'
         })
 
+class Pass12CleanMethodMixin:
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+
+        if password1 and password2:
+            # Check if passwords match
+            if password1 != password2:
+                self.add_error('password2', 'Паролите не съвпадат.')
+
+            # Additional password validations
+            if len(password1) < 8:
+                self.add_error('password1', 'Паролата трябва да бъде поне 8 символа.')
+            if password1.isdigit():
+                self.add_error('password1', 'Паролата не може да бъде само цифри.')
+            if not any(char.isdigit() for char in password1):
+                self.add_error('password1', 'Паролата трябва да съдържа поне една цифра.')
+            if not any(char.isupper() for char in password1):
+                self.add_error('password1', 'Паролата трябва да съдържа поне една главна буква.')
+            if not any(char.islower() for char in password1):
+                self.add_error('password1', 'Паролата трябва да съдържа поне една малка буква.')
+            if not any(char in "!@#$%^&*()-_=+[]{}|;:'\",.<>?/`~" for char in password1):
+                self.add_error('password1', 'Паролата трябва да съдържа поне един специален символ.')
+
+        return cleaned_data
+
+
 
 class FirstNameTextsMixin():
     def __init__(self, *args, **kwargs):

@@ -25,7 +25,7 @@ class Listing(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
     )
 
     salary = models.PositiveIntegerField(
-        validators=[MinValueValidator(1, 'Заплатата трябва да бъде число по-голямо от 0')],
+        validators=[MinValueValidator(1, 'Заплатата трябва да бъде празно поле или число по-голямо от 0')],
         null=True,
         blank=True,
     )

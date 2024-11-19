@@ -6,12 +6,12 @@ from django.core.exceptions import ValidationError
 from coach_app.choices import AccountsLicenceChoices
 from coach_app.accounts.mixins import UserNameTextsMixin, EmailTextsMixin, Pass12TextsMixin, PasswordTextsMixin, \
     UserNameOrEmailTextsMixin, FirstNameTextsMixin, LastNameTextsMixin, ClubTextsMixin, LicenseTextsMixin, \
-    UsernameCleanMethiodMixin
+    UsernameCleanMethiodMixin, Pass12CleanMethodMixin
 from coach_app.accounts.models import AppUser, Profile
 from coach_app.common.mixins import AddAsterixToRequired
 
 
-class AppUserCreationForm(AddAsterixToRequired,UserNameTextsMixin,UsernameCleanMethiodMixin, EmailTextsMixin,Pass12TextsMixin,UserCreationForm):
+class AppUserCreationForm(AddAsterixToRequired,UserNameTextsMixin,UsernameCleanMethiodMixin, EmailTextsMixin,Pass12TextsMixin,Pass12CleanMethodMixin, UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ['username', 'email',]
