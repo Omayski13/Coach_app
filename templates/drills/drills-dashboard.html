@@ -20,8 +20,9 @@
                     </div>
                     <div class="drill-info">
                         {% if drill.approved %}
-                            <h1>{{ drill.name }} <i class="fa-regular fa-circle-check"
-                                                    style="color: darkslategrey;"></i></h1>
+                            <h1>{{ drill.name }} <img style="width: 70px;height: 70px" src="{% static 'images/coach-like-big.png' %}"></h1>
+{#                            <h1>{{ drill.name }} <i class="fa-solid fa-user-check"#}
+{#                                                    style="color: whitesmoke;"></i></h1>#}
                         {% else %}
                             <h1>{{ drill.name }}</h1>
                         {% endif %}

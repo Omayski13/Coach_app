@@ -7,8 +7,7 @@
                 <div class="details-container">
 
                     {% if drill.approved %}
-                        <h1 class="drill-header">{{ drill.name }} <i class="fa-regular fa-circle-check"
-                                                                         style="color: whitesmoke;"></i></h1>
+                        <h1 class="drill-header">{{ drill.name }}<img style="width: 70px;height: 70px" src="{% static 'images/coach-like-big.png' %}"></h1>
                     {% else %}
                         <h1 class="drill-header">{{ drill.name }}</h1>
                     {% endif %}
@@ -75,12 +74,16 @@
         {% for comment in comments %}
             <div class="comment-card">
                 <div class="comment-header">
-                    <a href="{% url 'user-details' comment.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{{ comment.author.profile.profile_picture.url }}"></a>
-                    <h6><a href="{% url 'user-details' comment.author.pk %}"> {{ comment.author }}</a></h6>
                     {% if comment.author.profile.profile_picture %}
+                        <a href="{% url 'user-details' comment.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{{ comment.author.profile.profile_picture.url }}"></a>
+                    {% else %}
+                        <a href="{% url 'user-details' comment.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{% static 'images/common-profile-picture.png' %}"></a>
                     {% endif %}
+                    <h6><a href="{% url 'user-details' comment.author.pk %}"> {{ comment.author }}</a></h6>
                     
-                    <p>{{ comment.created_at|date:"d.m.Y H:i" }}</p>
+                    
+                    
+                    <p>{{ comment.created_at|date:"d.m.Y" }}</p>
                 </div>
                 <p> {{ comment.content }} </p>
             </div>
