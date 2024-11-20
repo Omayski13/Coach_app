@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <div class="search">
+    <form action="{% url 'drill-dashboard' %}" method="get">
+    {{ form }}
+    <button class="search-button"><i class="fa-solid fa-magnifying-glass"></i> Търси</button>
+        </form>
+    </div>
     <div class="container-drills">
         <div class="drills">
             {% for drill in drills %}

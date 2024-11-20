@@ -26,5 +26,19 @@ class DrillDeleteForm(DisableFieldsMixin,BaseDrillForm,OrderFieldsMixin):
         model = Drill
         exclude = ('author','created_at','updated_at','name','graphics')
 
+class SearchForm(forms.Form):
+    query = forms.CharField(
+        max_length=50,
+        label='',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'class':'search-field',
+                'placeholder':'Търси тренировка по име....'
+            }
+
+        )
+    )
+
 
 

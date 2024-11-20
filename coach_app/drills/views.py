@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView, FormView
 
 from coach_app.comments.forms import CommentAddForm
-from coach_app.drills.forms import DrillCreateForm, DrillDeleteForm, DrillEditForm
+from coach_app.drills.forms import DrillCreateForm, DrillDeleteForm, DrillEditForm, SearchForm
 from coach_app.drills.models import Drill
 
 
@@ -21,13 +21,19 @@ class DrillCreateView(CreateView):
         return super().form_valid(form)
 
 
-class DrillDashboardView(ListView):
+class DrillDashboardView(ListView,FormView):
     template_name = 'drills/drills-dashboard.html'
     context_object_name = 'drills'
     paginate_by = 5
+    form_class = SearchForm
 
     def get_queryset(self):
         queryset = Drill.objects.all()
+
+        if 'query' in self.request.GET:
+            query = self.request.GET.get('query')
+            queryset = queryset.filter(name__icontains=query)
+
 
         for_age_group = self.request.GET.get('for_age_group')
         focus = self.request.GET.get('focus')
