@@ -17,12 +17,12 @@ class DrillNameTextMixin():
         })
 
 
-# class OrderFieldsMixin():
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         field_order = []
-#         ordered_fields = {field: self.fields[field] for field in field_order if field in self.fields}
-#         self.fields = ordered_fields
+class OrderFieldsMixin():
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        field_order = []
+        ordered_fields = {field: self.fields[field] for field in field_order if field in self.fields}
+        self.fields = ordered_fields
 
 class DrillTextsMixin():
     def __init__(self, *args, **kwargs):
