@@ -372,3 +372,57 @@ div.comment-card p{
     justify-content: left;
 }
 
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0;
+}
+
+
+.search form{
+    /*padding: 1em;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+
+}
+.search-field{
+    font-size:1.2em;
+    padding-left: 0.5em;
+    width: 500px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+}
+
+.search-button{
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-left: 0.1em;
+}
+
+.sorting label{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.sorting h4{
+    padding: 0.5em 0;
+}
+
+select#sort-by{
+    color: whitesmoke;
+    background-color: darkslategrey;
+    border-radius: 1.5em;
+}
+
+option {
+    border-radius: 1.5em;
+    font-size: 18px;
+    background-color: darkslategrey;
+    color: whitesmoke;
+}

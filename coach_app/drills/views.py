@@ -1,9 +1,10 @@
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView, FormView
 
 from coach_app.comments.forms import CommentAddForm
-from coach_app.drills.forms import DrillCreateForm, DrillDeleteForm, DrillEditForm
+from coach_app.drills.forms import DrillCreateForm, DrillDeleteForm, DrillEditForm, SearchForm
 from coach_app.drills.models import Drill
 
 
@@ -21,13 +22,19 @@ class DrillCreateView(CreateView):
         return super().form_valid(form)
 
 
-class DrillDashboardView(ListView):
+class DrillDashboardView(ListView,FormView):
     template_name = 'drills/drills-dashboard.html'
     context_object_name = 'drills'
     paginate_by = 5
+    form_class = SearchForm
 
     def get_queryset(self):
         queryset = Drill.objects.all()
+
+        if 'query' in self.request.GET:
+            query = self.request.GET.get('query')
+            queryset = queryset.filter(name__icontains=query)
+
 
         for_age_group = self.request.GET.get('for_age_group')
         focus = self.request.GET.get('focus')
@@ -40,7 +47,19 @@ class DrillDashboardView(ListView):
         if approved == 'True':
             queryset = queryset.filter(approved=True)
 
-        return queryset.order_by('-created_at')
+        order_by = self.request.GET.get('order_by', '-created_at')
+        if order_by == 'likes':
+            queryset = queryset.annotate(like_count=Count('likes')).order_by('-like_count', '-created_at')
+        elif order_by == '-likes':
+            queryset = queryset.annotate(like_count=Count('likes')).order_by('like_count', '-created_at')
+        elif order_by == 'comments':
+            queryset = queryset.annotate(comment_count=Count('comments')).order_by('-comment_count', '-created_at')
+        elif order_by == '-comments':
+            queryset = queryset.annotate(comment_count=Count('comments')).order_by('comment_count', '-created_at')
+        else:
+            queryset = queryset.order_by(order_by)
+
+        return queryset
 
 
 
