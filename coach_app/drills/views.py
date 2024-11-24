@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView, FormView
@@ -46,7 +47,19 @@ class DrillDashboardView(ListView,FormView):
         if approved == 'True':
             queryset = queryset.filter(approved=True)
 
-        return queryset.order_by('-created_at')
+        order_by = self.request.GET.get('order_by', '-created_at')
+        if order_by == 'likes':
+            queryset = queryset.annotate(like_count=Count('likes')).order_by('-like_count', '-created_at')
+        elif order_by == '-likes':
+            queryset = queryset.annotate(like_count=Count('likes')).order_by('like_count', '-created_at')
+        elif order_by == 'comments':
+            queryset = queryset.annotate(comment_count=Count('comments')).order_by('-comment_count', '-created_at')
+        elif order_by == '-comments':
+            queryset = queryset.annotate(comment_count=Count('comments')).order_by('comment_count', '-created_at')
+        else:
+            queryset = queryset.order_by(order_by)
+
+        return queryset
 
 
 
