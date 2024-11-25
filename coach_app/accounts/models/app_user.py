@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, AbstractUser, User
+from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
 from coach_app.accounts.managers import AppUserManager
@@ -28,6 +29,13 @@ class AppUser(AbstractBaseUser,PermissionsMixin):
         },
     )
 
+    @property
+    def get_user_tropies(self):
+        return self.drills.aggregate(total_likes=Count('likes'))['total_likes'] or 0
+
+    # @property
+    # def get_user_comments(self):
+    #     return self.drills.aggregate(total_comments=Count('comments'))['total_comments'] or 0
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]

@@ -23,7 +23,7 @@ class Comment(CreatedAtMixin):
     author = models.ForeignKey(
         to=get_user_model(),
         on_delete=models.CASCADE,
-        related_name='author',
+        related_name='comments',
     )
 
     content = models.TextField(
