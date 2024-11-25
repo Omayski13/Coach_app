@@ -51,4 +51,3 @@ class Profile(models.Model):
             return self.first_name
         if self.last_name and not self.first_name:
             return self.last_name
-

@@ -24,6 +24,7 @@ class UserDetailsView(DetailView):
     model = AppUser
 
 
+
 class UserEditView(UpdateView):
     template_name = 'accounts/accounts-edit.html'
     form_class = AppUserEditForm
