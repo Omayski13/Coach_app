@@ -24,7 +24,7 @@
             {% if request.user.is_authenticated %}
                 <a href="{% url 'user-details' request.user.pk %}">Профил</a>
                  {% if request.user.profile.profile_picture %}
-                    <img class="nav-profile-img" src="{{ request.user.profile.profile_picture.url }}" style="height: 70px;width: 70px; border-radius: 50%">
+                     <a href="{% url 'user-details' request.user.pk %}"><img class="nav-profile-img" src="{{ request.user.profile.profile_picture.url }}" style="height: 70px;width: 70px; border-radius: 50%"></a>
                 {% endif %}
                 <a href="{% url 'user-logout' %}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Изход</a>
