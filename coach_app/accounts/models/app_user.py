@@ -33,9 +33,9 @@ class AppUser(AbstractBaseUser,PermissionsMixin):
     def get_user_tropies(self):
         return self.drills.aggregate(total_likes=Count('likes'))['total_likes'] or 0
 
-    # @property
-    # def get_user_comments(self):
-    #     return self.drills.aggregate(total_comments=Count('comments'))['total_comments'] or 0
+    @property
+    def get_user_comments(self):
+        return self.drills.aggregate(total_comments=Count('comments'))['total_comments'] or 0
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]

@@ -33,6 +33,10 @@
                         <h2 class="details"><span class="details-text">Получени трофеи:</span> <strong>{{ appuser.get_user_tropies }}</strong>
                         </h2>
                     {% endif %}
+                    {% if appuser.comments.count > 0 %}
+                        <h2 class="details"><span class="details-text">Създадени коментрари:</span> <strong>{{ appuser.get_user_comments }}</strong>
+                        </h2>
+                    {% endif %}
                     <a class="details-link" href="{% url 'user-edit' appuser.pk %}">Редактирай</a>
                     
                 </div>
