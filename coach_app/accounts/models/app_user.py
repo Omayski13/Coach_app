@@ -28,6 +28,12 @@ class AppUser(AbstractBaseUser,PermissionsMixin):
             "unique": _("Потребител с този имейл вече е регистриран"),
         },
     )
+    is_staff = models.BooleanField(
+        default=False,
+    )
+    is_active = models.BooleanField(
+        default=True,
+    )
 
     @property
     def get_user_tropies(self):
@@ -42,4 +48,6 @@ class AppUser(AbstractBaseUser,PermissionsMixin):
 
     objects = AppUserManager()
 
+    def __str__(self):
+        return self.username
 
