@@ -1,15 +1,23 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 
 from coach_app.common.models import Like
+from coach_app.drills.models import Drill
 
 
 # Create your views here.
 
 
-class HomePageView(TemplateView):
+class HomePageView(DetailView):
     template_name = 'home-page.html'
+    context_object_name = 'drill'
+
+    def get_object(self):
+        drill = Drill.objects.filter(approved=True, graphics__isnull=False).first()
+        return drill
+
+
 
 
 def likes_functionality(request, drill_pk: int):
@@ -25,4 +33,3 @@ def likes_functionality(request, drill_pk: int):
         like.save()
 
     return redirect(request.META.get('HTTP_REFERER') + f'#{drill_pk}')
-    # return reverse_lazy('drill-details')
