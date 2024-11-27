@@ -11,27 +11,44 @@
 
 
         <div class="nav-other">
-            <a href="{% url 'home-page' %}">Начало</a>
-            <a href="{% url 'listing-dashboard' %}">Обяви</a>
-            <a href="{% url 'listing-create' %}">Създай обява</a>
-            <a href="{% url 'drill-dashboard' %}">Tренировки</a>
-            <a href="{% url 'drill-create' %}">Създай Тренировка</a>
-
-
+            <a id="home" href="{% url 'home-page' %}">Начало</a>
+            <div class="dropdown">
+                <button id="listings" class="dropbtn"> Обяви </button>
+                <div class="dropdown-content">
+                    <a href="{% url 'listing-dashboard' %}">Разгледай</a>
+                    <a href="{% url 'listing-create' %}">Създай обява</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Tренировки</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'drill-dashboard' %}">Разгледай</a>
+                    <a href="{% url 'drill-create' %}">Създай Тренировка</a>
+                </div>
+            </div>
         </div>
 
         <div class="nav-profile">
             {% if request.user.is_authenticated %}
-                <a href="{% url 'user-details' request.user.pk %}">Профил</a>
-                 {% if request.user.profile.profile_picture %}
-                     <a href="{% url 'user-details' request.user.pk %}"><img class="nav-profile-img" src="{{ request.user.profile.profile_picture.url }}" style="height: 70px;width: 70px; border-radius: 50%"></a>
-                {% endif %}
-                <a href="{% url 'user-logout' %}"
+                <div class="dropdown">
+                <button class="dropbtn"> Профил </button>
+                <div class="dropdown-content">
+                    <a href="{% url 'user-details' request.user.pk %}">{{ request.user.username }}</a>
+                    <a href="{% url 'user-edit' request.user.pk %}">Редактирай</a>
+                    <a href="{% url 'user-logout' %}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Изход</a>
 
                 <form id="logout-form" method="post" action="{% url 'user-logout' %}" style="display: none;">
                     {% csrf_token %}
                 </form>
+                </div>
+            </div>
+                {% if request.user.profile.profile_picture %}
+                    <a href="{% url 'user-details' request.user.pk %}"><img class="nav-profile-img"
+                                                                            src="{{ request.user.profile.profile_picture.url }}"
+                                                                            style="height: 70px;width: 70px; border-radius: 50%"></a>
+                {% endif %}
+                
             {% else %}
                 <a href="{% url 'user-register' %}">Регистрация</a>
                 <a href="{% url 'user-login' %}">Вход</a>
