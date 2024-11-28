@@ -6,7 +6,7 @@
             <form class="form-group" method="post" enctype="multipart/form-data">
                 <div class="details-container">
                     {% if drill.approved %}
-                            <h1 class="listings-delete">{{ drill.name }} <i class="fa-regular fa-circle-check" style="color: whitesmoke;"></i></h1>
+                            <h1 class="listings-delete">{{ drill.name }}<img style="width: 70px;height: 70px" src="{% static 'images/coach-like-big.png' %}"></h1>
                         {% else %}
                             <h1>{{ drill.name }}</h1>
                         {% endif %}

@@ -13,6 +13,8 @@ from decouple import config
 
 from pathlib import Path
 
+import cloudinary
+
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'cloudinary',
+    'cloudinary_storage',
     'bootstrap5',
     'crispy_forms',
 
@@ -146,8 +150,14 @@ STATICFILES_DIRS = (
     BASE_DIR / 'static',
 )
 
-MEDIA_URL = 'media_files/'
-MEDIA_ROOT = BASE_DIR / 'media_files'
+cloudinary.config(
+    cloud_name=config('CLOUDINARY_CLOUD_NAME'),
+    api_key=config('CLOUDINARY_API_KEY'),
+    api_secret=config('CLOUDINARY_API_SECRET')
+)
+
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

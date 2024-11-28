@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.db import models
 
 from coach_app.choices import AccountsLicenceChoices
@@ -30,8 +31,9 @@ class Profile(models.Model):
         blank=True,
     )
 
-    profile_picture = models.ImageField(
-        upload_to='accounts/',
+    profile_picture = CloudinaryField(
+        'image',
+        folder='accounts',
         null=True,
         blank=True,
     )

@@ -1,3 +1,4 @@
+from cloudinary.uploader import destroy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.shortcuts import render, redirect
@@ -109,11 +110,46 @@ class DrillEditView(LoginRequiredMixin,UpdateView):
     model = Drill
     success_url = reverse_lazy('drill-dashboard')
 
+    def form_valid(self, form):
+        # Get the current object before changes
+        old_graphics = self.get_object().graphics
+
+        # Save the form to apply updates
+        response = super().form_valid(form)
+
+        # If the graphics field has changed, delete the old image from Cloudinary
+        new_graphics = self.object.graphics
+        if old_graphics != new_graphics and old_graphics:
+            try:
+                public_id = old_graphics.public_id
+                destroy(public_id)
+            except Exception as e:
+                print(f"Error deleting old graphics from Cloudinary: {e}")
+
+        return response
+
 class DrillDeleteView(LoginRequiredMixin,DeleteView):
     template_name = 'drills/drills-delete.html'
     form_class = DrillDeleteForm
     model = Drill
     success_url = reverse_lazy('drill-dashboard')
+
+    def form_valid(self, form):
+        # Retrieve the object to delete
+        self.object = self.get_object()
+
+        # Delete the associated image from Cloudinary
+        if self.object.graphics:
+            try:
+                # Use the public_id from the Cloudinary field
+                public_id = self.object.graphics.public_id
+                destroy(public_id)  # Delete the image from Cloudinary
+            except Exception as e:
+                # Log the error (optional)
+                print(f"Error deleting image from Cloudinary: {e}")
+
+        # Proceed with deleting the Drill instance
+        return super().form_valid(form)
 
     def get_initial(self):
         return self.object.__dict__
