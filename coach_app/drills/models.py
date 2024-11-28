@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -8,11 +9,13 @@ from coach_app.common.mixins import CreatedAtMixin, UpdatedAtMixin, ForAgeGroupM
 # Create your models here.
 
 class Drill(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
-    graphics = models.ImageField(
-        upload_to='drills/',
+    graphics = CloudinaryField(
+        'image',
+        folder='drills',  # Optional: Store images in a specific folder on Cloudinary
         null=True,
         blank=True,
     )
+
 
     name = models.CharField(
         max_length=50,
