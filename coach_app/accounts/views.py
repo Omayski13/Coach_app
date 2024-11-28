@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
@@ -19,17 +20,24 @@ class UserRegisterVIew(CreateView):
 #     form_class = UserLoginForm
 
 
-class UserDetailsView(DetailView):
+class UserDetailsView(LoginRequiredMixin,DetailView):
     template_name = 'accounts/accounts-details.html'
     model = AppUser
 
 
 
-class UserEditView(UpdateView):
+class UserEditView(LoginRequiredMixin,UpdateView):
     template_name = 'accounts/accounts-edit.html'
     form_class = AppUserEditForm
     model = Profile
-    success_url = reverse_lazy('home-page')
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'user-details',
+            kwargs={
+                'pk':self.object.pk
+            }
+        )
 
 
     def get_context_data(self, **kwargs):

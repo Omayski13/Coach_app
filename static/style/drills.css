@@ -44,7 +44,7 @@ div.container-drills{
     box-sizing: border-box;
     float: none;
     height: auto;
-    width: 50%;
+    width: auto;
     display: flex;
     justify-content: space-around;
 
@@ -54,7 +54,7 @@ div.container-drills{
     color: darkgreen;
 }
 
-.details{
+div.details#home-page{
     display: flex;
     justify-content: space-around;
 }
@@ -316,6 +316,14 @@ div.container-drills{
 .no-drills-link:hover {
     background-color: whitesmoke;
     color: black;
+}
+
+h1.drill-header #approve{
+    color: whitesmoke;
+}
+
+h1.drill-header #approve:hover{
+    color: darkgreen;
 }
 
 
