@@ -1,3 +1,4 @@
+from cloudinary.uploader import destroy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, get_object_or_404
@@ -38,6 +39,24 @@ class UserEditView(LoginRequiredMixin,UpdateView):
                 'pk':self.object.pk
             }
         )
+
+    def form_valid(self, form):
+        # Get the current object before changes
+        old_profile_picture = self.get_object().profile_picture
+
+        # Save the form to apply updates
+        response = super().form_valid(form)
+
+        # If the graphics field has changed, delete the old image from Cloudinary
+        new_profile_picture = self.object.profile_picture
+        if old_profile_picture != new_profile_picture and old_profile_picture:
+            try:
+                public_id = old_profile_picture.public_id
+                destroy(public_id)
+            except Exception as e:
+                print(f"Error deleting old graphics from Cloudinary: {e}")
+
+        return response
 
 
     def get_context_data(self, **kwargs):
