@@ -108,6 +108,14 @@ footer {
     background-color: darkgreen;
 }
 
+.nav-profile a#photo{
+   padding: 0;
+}
+
+.nav-profile a#photo:hover {
+    background-color: darkslategrey;
+}
+
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
