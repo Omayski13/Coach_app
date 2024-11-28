@@ -3,17 +3,18 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
 from coach_app.accounts.forms import AppUserCreationForm, AppUserEditForm
+from coach_app.accounts.models import Profile
 
 # Register your models here.
 
 UserModel = get_user_model()
 @admin.register(UserModel)
 class AppUserAdmin(UserAdmin):
-    model = UserModel
-    add_form =AppUserCreationForm
-    form = AppUserEditForm
+    # model = UserModel
+    # add_form =AppUserCreationForm
+    # form = AppUserEditForm
 
-    list_display = ('pk','username', 'email', 'is_staff', 'is_superuser')
+    list_display = ('username', 'email', 'is_staff', 'is_superuser')
     search_fields = ('email',)
     ordering = ('pk',)
 
@@ -34,3 +35,7 @@ class AppUserAdmin(UserAdmin):
         ),
     )
 
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    pass

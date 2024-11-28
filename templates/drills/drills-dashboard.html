@@ -120,20 +120,12 @@
                 <h4>Тренировки</h4>
                 <ul>
                     <li class="{% if request.GET.approved == 'True' %}active{% endif %}">
-                        <a href="?
-                                        
-                                        
-                                
-                                {% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=True">
-                            Само одобрени
+                        <a href="?{% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=True">
+                            Одобрени
                         </a>
                     </li>
                     <li class="{% if request.GET.approved == 'False' or request.GET.approved is None %}active{% endif %}">
-                        <a href="?
-                                        
-                                        
-                                
-                                {% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=False">
+                        <a href="?{% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=False">
                             Всички тренировки
                         </a>
                     </li>
@@ -145,12 +137,7 @@
                 <ul>
                     {% for group in age_groups %}
                         <li class="{% if request.GET.for_age_group == group %}active{% endif %}">
-                            <a href="?
-                                    
-                                            
-                                            
-                                    
-                                    {% for key, value in request.GET.items %}{% if key != 'for_age_group' %}{{ key }}={{ value }}&{% endif %}{% endfor %}for_age_group={{ group }}">
+                            <a href="?{% for key, value in request.GET.items %}{% if key != 'for_age_group' %}{{ key }}={{ value }}&{% endif %}{% endfor %}for_age_group={{ group }}">
                                 {{ group }}
                             </a>
                         </li>
@@ -163,11 +150,7 @@
                 <ul>
                     {% for focus_option in focus_options %}
                         <li class="{% if request.GET.focus == focus_option %}active{% endif %}">
-                            <a href="?
-                                            
-                                            
-                                    
-                                    {% for key, value in request.GET.items %}{% if key != 'focus' %}{{ key }}={{ value }}&{% endif %}{% endfor %}focus={{ focus_option }}">
+                            <a href="?{% for key, value in request.GET.items %}{% if key != 'focus' %}{{ key }}={{ value }}&{% endif %}{% endfor %}focus={{ focus_option }}">
                                 {{ focus_option }}
                             </a>
                         </li>

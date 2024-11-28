@@ -44,7 +44,7 @@
                 </div>
             </div>
                 {% if request.user.profile.profile_picture %}
-                    <a href="{% url 'user-details' request.user.pk %}"><img class="nav-profile-img"
+                    <a id="photo" href="{% url 'user-details' request.user.pk %}"><img class="nav-profile-img"
                                                                             src="{{ request.user.profile.profile_picture.url }}"
                                                                             style="height: 70px;width: 70px; border-radius: 50%"></a>
                 {% endif %}

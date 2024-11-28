@@ -107,23 +107,23 @@ AUTHENTICATION_BACKENDS = [
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'coach_app.accounts.validators.CustomMinimumLengthValidator',
-        'OPTIONS': {
-            'min_length': 8,
-        }
-    },
-    {
-        'NAME': 'coach_app.accounts.validators.CustomCommonPasswordValidator',
-    },
-    {
-        'NAME': 'coach_app.accounts.validators.CustomNumericPasswordValidator',
-    },
-]
+# AUTH_PASSWORD_VALIDATORS = [
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+#     },
+#     {
+#         'NAME': 'coach_app.accounts.validators.CustomMinimumLengthValidator',
+#         'OPTIONS': {
+#             'min_length': 8,
+#         }
+#     },
+#     {
+#         'NAME': 'coach_app.accounts.validators.CustomCommonPasswordValidator',
+#     },
+#     {
+#         'NAME': 'coach_app.accounts.validators.CustomNumericPasswordValidator',
+#     },
+# ]
 
 
 # Internationalization
