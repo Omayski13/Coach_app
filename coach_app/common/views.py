@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, DetailView
@@ -19,7 +20,7 @@ class HomePageView(DetailView):
 
 
 
-
+@login_required
 def likes_functionality(request, drill_pk: int):
     liked_object = Like.objects.filter(
         to_drill_id=drill_pk,
@@ -33,3 +34,10 @@ def likes_functionality(request, drill_pk: int):
         like.save()
 
     return redirect(request.META.get('HTTP_REFERER') + f'#{drill_pk}')
+
+@login_required
+def approve_drill(request, pk):
+    drill = Drill.objects.get(pk=pk)
+    drill.approved = True
+    drill.save()
+    return redirect(request.META.get('HTTP_REFERER'))

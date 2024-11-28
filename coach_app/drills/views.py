@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -11,7 +12,7 @@ from coach_app.drills.models import Drill
 # Create your views here.
 
 
-class DrillCreateView(CreateView):
+class DrillCreateView(LoginRequiredMixin,CreateView):
     template_name = 'drills/drills-create.html'
     form_class = DrillCreateForm
     success_url = reverse_lazy('drill-dashboard')
@@ -22,7 +23,7 @@ class DrillCreateView(CreateView):
         return super().form_valid(form)
 
 
-class DrillDashboardView(ListView,FormView):
+class DrillDashboardView(LoginRequiredMixin,ListView,FormView):
     template_name = 'drills/drills-dashboard.html'
     context_object_name = 'drills'
     paginate_by = 5
@@ -74,7 +75,7 @@ class DrillDashboardView(ListView,FormView):
 
         return context
 
-class DrillDetailsView(DetailView):
+class DrillDetailsView(LoginRequiredMixin,DetailView):
     template_name = 'drills/drills-details.html'
     model = Drill
 
@@ -102,13 +103,13 @@ class DrillDetailsView(DetailView):
 
 
 
-class DrillEditView(UpdateView):
+class DrillEditView(LoginRequiredMixin,UpdateView):
     template_name = 'drills/drills-edit.html'
     form_class = DrillEditForm
     model = Drill
     success_url = reverse_lazy('drill-dashboard')
 
-class DrillDeleteView(DeleteView):
+class DrillDeleteView(LoginRequiredMixin,DeleteView):
     template_name = 'drills/drills-delete.html'
     form_class = DrillDeleteForm
     model = Drill

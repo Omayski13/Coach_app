@@ -8,14 +8,24 @@
 
                     {% if drill.approved %}
                         <h1 class="drill-header">{{ drill.name }}<img style="width: 70px;height: 70px" src="{% static 'images/coach-like-big.png' %}"></h1>
-                    {% else %}
-                        <h1 class="drill-header">{{ drill.name }}</h1>
+                    {% elif drill.approved == False %}
+                        {% if 'drills.can_approve_drills' in request.user.get_group_permissions %}
+                        <h1 class="drill-header">
+                            {{ drill.name }} <a href="{% url 'approve_drill' drill.pk %}"><i id="approve" class="fa-solid fa-circle-check"></i></a>
+                        </h1>
+                        {% else %}
+                            <h1 class="drill-header">
+                                {{ drill.name }}
+                            </h1>
+                            {% endif %}
                     {% endif %}
                     <div class="drill-author-date">
                         <div class="author">
                             <p>Добавена от:</p>
                             <div class="author-details">
+                                {% if drill.author.profile_picture %}
                                 <a href="{% url 'user-details' drill.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{{ drill.author.profile.profile_picture.url }}"></a>
+                                {% endif %}
                                 <h5><a href="{% url 'user-details' drill.author.pk %}">{{ drill.author.username }}</a></h5></a>
                             </div>
                             

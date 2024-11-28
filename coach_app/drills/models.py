@@ -64,5 +64,10 @@ class Drill(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
         default=False,
     )
 
+    class Meta:
+        permissions = [
+            ('can_approve_drills','Can approve drills')
+        ]
+
 
 
