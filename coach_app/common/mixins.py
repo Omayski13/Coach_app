@@ -29,6 +29,7 @@ class CreatedAtMixin(models.Model):
         abstract = True
 
 
+
 class UpdatedAtMixin(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True,
