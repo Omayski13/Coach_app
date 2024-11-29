@@ -22,7 +22,7 @@ class AddAsterixToRequired():
 
 class CreatedAtMixin(models.Model):
     created_at = models.DateTimeField(
-        auto_now=True,
+        auto_now_add=True,
     )
 
     class Meta:
@@ -32,7 +32,7 @@ class CreatedAtMixin(models.Model):
 
 class UpdatedAtMixin(models.Model):
     updated_at = models.DateTimeField(
-        auto_now_add=True,
+        auto_now=True,
     )
 
     class Meta:
