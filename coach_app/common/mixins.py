@@ -49,3 +49,5 @@ class ForAgeGroupMixin(models.Model):
 
     class Meta:
         abstract=True
+
+
