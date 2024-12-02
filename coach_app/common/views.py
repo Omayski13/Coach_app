@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, DetailView
+from rest_framework.exceptions import PermissionDenied
 
 from coach_app.common.models import Like
 from coach_app.drills.models import Drill
@@ -11,7 +12,7 @@ from coach_app.drills.models import Drill
 
 
 class HomePageView(DetailView):
-    template_name = 'home-page.html'
+    template_name = 'common/home-page.html'
     context_object_name = 'drill'
 
     def get_object(self):
@@ -37,7 +38,10 @@ def likes_functionality(request, drill_pk: int):
 
 @login_required
 def approve_drill(request, pk):
-    drill = Drill.objects.get(pk=pk)
-    drill.approved = True
-    drill.save()
-    return redirect(request.META.get('HTTP_REFERER'))
+    if request.user.has_perm('drills.can_approve_drills'):
+        drill = get_object_or_404(Drill, pk=pk)
+        drill.approved = True
+        drill.save()
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        raise PermissionDenied

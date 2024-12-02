@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'common/base.html' %}
 {% load static %}
 {% block content %}
     <div class="search">
@@ -22,18 +22,16 @@
                         {% if drill.approved %}
                             <h1>{{ drill.name }} <img style="width: 70px;height: 70px"
                                                       src="{% static 'images/coach-like-big.png' %}"></h1>
-                            {#                            <h1>{{ drill.name }} <i class="fa-solid fa-user-check"#}
-                            {#                                                    style="color: whitesmoke;"></i></h1>#}
+
                         {% else %}
                             <h1>{{ drill.name }}</h1>
                         {% endif %}
                         <h4>{{ drill.for_age_group }}</h4>
                         <h4>{{ drill.focus }}</h4>
 
-                        <!-- car model -->
+
                         <p class="description">{{ drill.description|truncatewords:30 }}</p>
                         <div class="cup-comments">
-                            {#                            <a style="text-decoration: none" href="{% url 'like' drill.pk %}">#}
                             {% if drill.has_liked %}
                                 <a class="like-link" href="{% url 'like' drill.pk %}"><p><i id="unlike"
                                                                                             class="fa-solid fa-trophy liked-icon"></i>{{ drill.likes.count }}
@@ -172,5 +170,5 @@
     </div>
     </div>
     </div>
-    {% include 'pagination.html' %}
+    {% include 'common/pagination.html' %}
 {% endblock %}
