@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, DetailView
 from rest_framework.exceptions import PermissionDenied
 
@@ -34,7 +34,10 @@ def likes_functionality(request, drill_pk: int):
         like = Like(to_drill_id=drill_pk, user=request.user)
         like.save()
 
-    return redirect(request.META.get('HTTP_REFERER') + f'#{drill_pk}')
+    referer_url = reverse('drill-dashboard')  # Ensure 'drill-dashboard' is your named URL
+    redirect_url = f"{referer_url}#{drill_pk}"
+
+    return redirect(redirect_url)
 
 @login_required
 def approve_drill(request, pk):
