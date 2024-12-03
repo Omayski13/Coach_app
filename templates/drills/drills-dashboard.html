@@ -10,7 +10,7 @@
     <div class="container-drills">
         <div class="drills">
             {% for drill in drills %}
-                <div class="drill-card">
+                <div id="{{ drill.id }}" class="drill-card">
                     <div class="image-wrap">
                         {% if drill.graphics %}
                             <img src="{{ drill.graphics.url }}" alt="Drill"/>
@@ -172,3 +172,25 @@
     </div>
     {% include 'common/pagination.html' %}
 {% endblock %}
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Restore scroll position
+        const scrollPosition = new URLSearchParams(window.location.search).get('scroll');
+        if (scrollPosition) {
+            window.scrollTo(0, parseInt(scrollPosition));
+        }
+
+        // Add scroll position to like links
+        const likeLinks = document.querySelectorAll('.like-link');
+        likeLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                const currentScroll = window.scrollY; // Get current scroll position
+                const url = new URL(link.href);
+                url.searchParams.set('scroll', currentScroll); // Append scroll position
+                link.href = url.toString(); // Update link with scroll position
+            });
+        });
+    });
+</script>
