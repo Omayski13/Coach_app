@@ -12,13 +12,19 @@ from coach_app.drills.models import Drill
 
 
 class HomePageView(DetailView):
-    template_name = 'common/home-page.html'
+    # template_name = 'common/home-page-not-logged.html'
     context_object_name = 'drill'
 
     def get_object(self):
         drill = Drill.objects.filter(approved=True, graphics__isnull=False).first()
         return drill
 
+
+    def get_template_names(self):
+        if self.request.user.is_authenticated:
+            return['common/home-page-logged.html']
+        else:
+            return ['common/home-page-not-logged.html']
 
 
 @login_required

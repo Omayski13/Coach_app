@@ -55,6 +55,10 @@ class AppUserDetailsForm(forms.Form):
 
 
 class AppUserEditForm(UserNameTextsMixin,FirstNameTextsMixin,LastNameTextsMixin,ClubTextsMixin,LicenseTextsMixin,forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
     username = forms.CharField(
         max_length=50,
         required=True
@@ -65,9 +69,17 @@ class AppUserEditForm(UserNameTextsMixin,FirstNameTextsMixin,LastNameTextsMixin,
         if AppUser.objects.filter(username=username).exists() and self.instance.user.username != username:
             raise ValidationError('Това потребителско име вече е заето.')
         return username
-    class Meta:
-        model = Profile
-        exclude = ['user']
+
+    def save(self, commit=True):
+        profile = super().save(commit=False)
+        username = self.cleaned_data.get('username')
+        if username:
+            profile.user.username = username
+            profile.user.save()
+        if commit:
+            profile.save()
+        return profile
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         field_order = ['username', 'first_name', 'last_name', 'club', 'license','profile_picture']
