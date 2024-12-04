@@ -30,35 +30,6 @@ div.container-drills{
     justify-content: space-around;
 }
 
-#home-drill-card{
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-    margin: 20px 50px;
-    padding: 50px;
-    /*margin-left: 50px;*/
-    background-position: right 35% bottom 45%;
-    box-sizing: border-box;
-    float: none;
-    height: auto;
-    width: auto;
-    display: flex;
-    justify-content: space-around;
-
-}
-
-.home-text-details{
-    color: darkgreen;
-}
-
-div.details#home-page{
-    display: flex;
-    justify-content: space-around;
-}
-
 .drills{
     display: inline-block;
     width: 80%;

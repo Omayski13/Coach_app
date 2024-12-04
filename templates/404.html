@@ -1,7 +1,18 @@
-{% include 'common/base.html' %}
+{% extends 'common/base.html' %}
 {% block content %}
-     <h1>404 Error</h1>
-    <p>Сори, тренер.</p>
-    <p>Тази страница не съществува</p>
-    <a href="/">Върни се към начало</a>
+    <div class="error-not-found">
+        <h1>404 Error</h1>
+        <p>Сори, тренер.</p>
+        <p>Тази страница не съществува</p>
+        <a href="/">Върни се към начало</a>
+    </div>
 {% endblock %}
+
+<style>
+div.error-not-found{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20em 0;
+}
+</style>

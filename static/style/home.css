@@ -1,0 +1,73 @@
+.home-info h1,
+.home-info h3,
+.home-info p{
+    padding-top: 0.7em;
+    color: black;
+    text-align: center;
+}
+
+.home-info p{
+    font-size: 1.5em;
+}
+
+.home-info a{
+    text-decoration: none;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.home-info a:hover{
+    color: darkgreen;
+}
+
+
+#home-card{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    margin: 20px 50px;
+    padding: 50px 8em;
+    /*margin-left: 50px;*/
+    background-position: right 35% bottom 45%;
+    box-sizing: border-box;
+    float: none;
+    height: auto;
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+#home-drill-card{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    margin: 20px 50px;
+    padding: 50px;
+    /*margin-left: 50px;*/
+    background-position: right 35% bottom 45%;
+    box-sizing: border-box;
+    float: none;
+    height: auto;
+    width: auto;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.home-text-details{
+    color: whitesmoke;
+}
+
+div.details#home-page{
+    display: flex;
+    justify-content: space-around;
+}
