@@ -8,6 +8,10 @@ class ListingTextsMixin():
             'placeholder': "Въведи името на отбора...",
             'class': 'wide-input'
         })
+        self.fields['club'].error_messages={
+            'required':'Tova pole e zaduljitelno',
+            'invalid':'nevalidno ime'
+        }
 
         self.fields['experience_needed'].label = "Необходими години опит "
         self.fields['experience_needed'].widget.attrs.update({
