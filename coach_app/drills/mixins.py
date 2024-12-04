@@ -45,7 +45,6 @@ class DrillTextsMixin():
             'placeholder': 'пример: преодоляване на противник',
             'class': 'wide-input-drills'
         })
-        self.fields['objectives'].required = True
 
         self.fields['focus'].required = True
         self.fields['focus'].label = "Фокус"
