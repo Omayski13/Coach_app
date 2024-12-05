@@ -18,7 +18,7 @@ class TestBaseDrillForm(TestCase):
         self.valid_drill_data = {
             'for_age_group':'U5 - U6',
             'graphics':None,
-            'name':'test_name',
+            'name':'test name',
             'objectives':'test_',
             'description':'test_description',
             'focus':'Подаване',

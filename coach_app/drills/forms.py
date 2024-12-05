@@ -13,7 +13,15 @@ class BaseDrillForm(AddAsterixToRequired,DrillTextsMixin,forms.ModelForm):
 
 
 class DrillCreateForm(DrillGraphicsTextsMixin,DrillNameTextMixin,BaseDrillForm):
-    pass
+    def save(self,commit=True):
+        drill = super().save(commit=False)
+        drill.name = drill.name.capitalize()
+
+        if commit:
+            drill.save()
+
+        return drill
+
 
 
 class DrillEditForm(DrillGraphicsTextsMixin,DrillNameTextMixin,BaseDrillForm):
