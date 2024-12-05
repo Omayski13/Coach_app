@@ -113,7 +113,7 @@ class DrillEditView(LoginRequiredMixin, UpdateView):
         if self.request.user != self.object.author:
             if not self.request.user.is_superuser:
                 raise PermissionDenied
-        return super().dispatch(request, *args,**kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
     def form_valid(self, form):
@@ -146,20 +146,16 @@ class DrillDeleteView(LoginRequiredMixin, DeleteView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        # Retrieve the object to delete
         self.object = self.get_object()
 
-        # Delete the associated image from Cloudinary
         if self.object.graphics:
             try:
-                # Use the public_id from the Cloudinary field
                 public_id = self.object.graphics.public_id
-                destroy(public_id)  # Delete the image from Cloudinary
+                destroy(public_id)
             except Exception as e:
                 # Log the error (optional)
                 print(f"Error deleting image from Cloudinary: {e}")
 
-        # Proceed with deleting the Drill instance
         return super().form_valid(form)
 
     def get_initial(self):

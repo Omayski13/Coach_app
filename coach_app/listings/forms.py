@@ -12,7 +12,15 @@ class ListingBaseForm(AddAsterixToRequired,ListingTextsMixin,forms.ModelForm):
 
 
 class ListingCreateForm(ListingBaseForm):
-    pass
+    class Meta(ListingBaseForm.Meta):
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['club'].required = True
+        self.fields['club'].error_messages = {
+            'required': 'Полето "Отбор" е задължително.'
+        }
 
 
 class ListingDashboardForm(ListingBaseForm):

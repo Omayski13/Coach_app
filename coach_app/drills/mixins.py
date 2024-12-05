@@ -15,6 +15,10 @@ class DrillNameTextMixin():
             'placeholder': "пример: 1 срещу 1 на тъча",
             'class': 'wide-input-drills'
         })
+        self.fields['name'].error_messages = {
+            'required': 'Полето "Име" е задължително.'
+        }
+
 
 
 class OrderFieldsMixin():
@@ -38,6 +42,9 @@ class DrillTextsMixin():
         self.fields['for_age_group'].widget.attrs.update({
             'class': 'wide-input-drills'
         })
+        self.fields['for_age_group'].error_messages = {
+            'required': 'Полето "За възрастова група" е задължително.'
+        }
 
         self.fields['objectives'].required = True
         self.fields['objectives'].label = "Цели"
@@ -45,12 +52,18 @@ class DrillTextsMixin():
             'placeholder': 'пример: преодоляване на противник',
             'class': 'wide-input-drills'
         })
+        self.fields['objectives'].error_messages = {
+            'required': 'Полето "Цели" е задължително.'
+        }
 
         self.fields['focus'].required = True
         self.fields['focus'].label = "Фокус"
         self.fields['focus'].widget.attrs.update({
             'class': 'wide-input-drills'
         })
+        self.fields['focus'].error_messages = {
+            'required': 'Полето "Фокус" е задължително.'
+        }
 
         self.fields['dimensions'].required = True
         self.fields['dimensions'].label = "Размери"
@@ -58,6 +71,9 @@ class DrillTextsMixin():
             'placeholder': "пример: 20х20",
             'class': 'wide-input-drills'
         })
+        self.fields['dimensions'].error_messages = {
+            'required': 'Полето "Размери" е задължително.'
+        }
 
         self.fields['series'].required = True
         self.fields['series'].label = "Серии"
@@ -65,6 +81,9 @@ class DrillTextsMixin():
             'placeholder': "пример: 2х3''",
             'class': 'wide-input-drills'
         })
+        self.fields['series'].error_messages = {
+            'required': 'Полето "Серии" е задължително.'
+        }
 
         self.fields['duration'].label = "Общо времетраене"
         self.fields['duration'].widget.attrs.update({
@@ -78,6 +97,9 @@ class DrillTextsMixin():
             'placeholder': "Въведи описание на упражнението",
             'class': 'wide-input-drills'
         })
+        self.fields['description'].error_messages = {
+            'required': 'Полето "Описание" е задължително.'
+        }
 
         self.fields['coaching_points'].required = True
         self.fields['coaching_points'].label = "Треньорски цели"
@@ -85,6 +107,9 @@ class DrillTextsMixin():
             'placeholder': "пример: правилно изпълнение на финтови движения",
             'class': 'wide-input-drills'
         })
+        self.fields['coaching_points'].error_messages = {
+            'required': 'Полето "Треньорски цели" е задължително.'
+        }
 
         self.fields['progression'].label = "Прогресия"
         self.fields['progression'].widget.attrs.update({

@@ -2,7 +2,7 @@
 {% block content %}
     <div class="container-form">
         <section id="create-user">
-            <form class="form-group" method="post" enctype="multipart/form-data">
+            <form class="form-group" method="post" enctype="multipart/form-data" novalidate>
                 <h1>Създай тренировка</h1>
                 {% csrf_token %}
                 {{ form.as_p }}
