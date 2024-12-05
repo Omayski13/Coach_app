@@ -1,7 +1,18 @@
-{% include 'common/base.html' %}
+{% extends 'common/base.html' %}
 {% block content %}
-     <h1>404 Error</h1>
-    <p>Сори, тренер.</p>
-    <p>Нямаш нужните права, за да извършиш този тактически ход</p>
-    <a href="/">Върни се към начало</a>
+    <div class="error-forbidden">
+        <h1>403 Error</h1>
+        <p>Сори, тренер.</p>
+        <p>Нямаш нужните права, за да извършиш този тактически ход</p>
+        <a href="/">Върни се към начало</a>
+    </div>
 {% endblock %}
+
+<style>
+    div.error-forbidden {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20em 0;
+    }
+</style>

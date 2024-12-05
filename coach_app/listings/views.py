@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, FormView, UpdateView, DeleteView
+from rest_framework.exceptions import PermissionDenied
 
 from coach_app.listings.forms import ListingCreateForm, ListingDetailForm, ListingEditForm, ListingDeleteForm
 from coach_app.listings.models import Listing
@@ -43,12 +44,28 @@ class ListingEditView(LoginRequiredMixin,UpdateView):
     model = Listing
     success_url = reverse_lazy('listing-dashboard')
 
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.author != self.request.user:
+            if not self.request.user.is_superuser:
+                raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+
 
 class ListingDeleteView(LoginRequiredMixin,DeleteView):
     template_name = 'listings/listings-delete.html'
     form_class = ListingDeleteForm
     model = Listing
     success_url = reverse_lazy('listing-dashboard')
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.author != self.request.user:
+            if not self.request.user.is_superuser:
+                raise PermissionDenied
+        return super().dispatch(request,*args,**kwargs)
 
     def get_initial(self):
         return self.object.__dict__

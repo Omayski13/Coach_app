@@ -5,32 +5,32 @@
             <section class="listings">
 
                 {% if listing.for_age_group %}
-                    {% if listing.author.pk == request.user.pk %}
+                    {% if listing.author.pk == request.user.pk or request.user.is_superuser %}
                            <h2>
                             {{ listing.club }} търси треньор за {{ listing.for_age_group }}
-                            <a href="{% url 'listing-details' listing.pk %}"><i class="fa-solid fa-eye" id="first-icon"></i></a>
+                            <a href="{% url 'listing-details' listing.pk %}"><i class="fa-solid fa-eye" id="first-icon"></i> Разгледай</a>
                             <a href="{% url 'listing-edit' listing.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="{% url 'listing-delete' listing.pk %}"><i class="fa-solid fa-trash"></i></a>
                         </h2>
                     {% else %}
                         <h2>
                             {{ listing.club }} търси треньор за {{ listing.for_age_group }}
-                            <a href="{% url 'listing-details' listing.pk %}" class="listings-icon"><i class="fa-solid fa-eye" id="first-icon"></i></a>
+                            <a href="{% url 'listing-details' listing.pk %}" class="listings-icon"><i class="fa-solid fa-eye" id="first-icon"></i> Разгледай</a>
                         </h2>
                     {% endif %}
 
                 {% else %}
-                    {% if listing.author.pk == request.user.pk %}
+                    {% if listing.author.pk == request.user.pk or request.user.is_superuser %}
                         <h2>
                             {{ listing.club }} търси треньор
-                            <a href="{% url 'listing-details' listing.pk %}"><i class="fa-solid fa-eye" id="first-icon"></i></a>
+                            <a href="{% url 'listing-details' listing.pk %}"><i class="fa-solid fa-eye" id="first-icon"></i> Разгледай</a>
                             <a href="{% url 'listing-edit' listing.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="{% url 'listing-delete' listing.pk %}"><i class="fa-solid fa-trash"></i></a>
                         </h2>
                     {% else %}
                         <h2>
                             {{ listing.club }} търси треньор
-                            <a href="{% url 'listing-details' listing.pk %}" class="listings-icon"><i class="fa-solid fa-eye" id="first-icon"></i></a>
+                            <a href="{% url 'listing-details' listing.pk %}" class="listings-icon"><i class="fa-solid fa-eye" id="first-icon"></i> Разгледай</a>
                         </h2>
                     {% endif %}
 

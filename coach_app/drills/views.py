@@ -1,5 +1,6 @@
 from cloudinary.uploader import destroy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -13,7 +14,7 @@ from coach_app.drills.models import Drill
 # Create your views here.
 
 
-class DrillCreateView(LoginRequiredMixin,CreateView):
+class DrillCreateView(LoginRequiredMixin, CreateView):
     template_name = 'drills/drills-create.html'
     form_class = DrillCreateForm
     success_url = reverse_lazy('drill-dashboard')
@@ -24,7 +25,7 @@ class DrillCreateView(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
 
-class DrillDashboardView(LoginRequiredMixin,ListView,FormView):
+class DrillDashboardView(LoginRequiredMixin, ListView, FormView):
     template_name = 'drills/drills-dashboard.html'
     context_object_name = 'drills'
     paginate_by = 5
@@ -36,7 +37,6 @@ class DrillDashboardView(LoginRequiredMixin,ListView,FormView):
         if 'query' in self.request.GET:
             query = self.request.GET.get('query')
             queryset = queryset.filter(name__icontains=query)
-
 
         for_age_group = self.request.GET.get('for_age_group')
         focus = self.request.GET.get('focus')
@@ -63,8 +63,6 @@ class DrillDashboardView(LoginRequiredMixin,ListView,FormView):
 
         return queryset
 
-
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['age_groups'] = ['U5 - U6', 'U7 - U8', 'U9 - U10', 'U11 - U12', 'U13 - U14', 'U15 - U16', 'U17 - U19']
@@ -73,10 +71,10 @@ class DrillDashboardView(LoginRequiredMixin,ListView,FormView):
         for drill in context['drills']:
             drill.has_liked = drill.likes.filter(user=self.request.user).exists()
 
-
         return context
 
-class DrillDetailsView(LoginRequiredMixin,DetailView):
+
+class DrillDetailsView(LoginRequiredMixin, DetailView):
     template_name = 'drills/drills-details.html'
     model = Drill
 
@@ -90,7 +88,7 @@ class DrillDetailsView(LoginRequiredMixin,DetailView):
 
         return context
 
-    def post(self, request,  *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = CommentAddForm(request.POST)
 
@@ -103,21 +101,25 @@ class DrillDetailsView(LoginRequiredMixin,DetailView):
             return redirect(f'{self.request.path}#comments')
 
 
-
-class DrillEditView(LoginRequiredMixin,UpdateView):
+class DrillEditView(LoginRequiredMixin, UpdateView):
     template_name = 'drills/drills-edit.html'
     form_class = DrillEditForm
     model = Drill
     success_url = reverse_lazy('drill-dashboard')
 
-    def form_valid(self, form):
-        # Get the current object before changes
-        old_graphics = self.get_object().graphics
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
 
-        # Save the form to apply updates
+        if self.request.user != self.object.author:
+            if not self.request.user.is_superuser:
+                raise PermissionDenied
+        return super().dispatch(request, *args,**kwargs)
+
+
+    def form_valid(self, form):
+        old_graphics = self.get_object().graphics
         response = super().form_valid(form)
 
-        # If the graphics field has changed, delete the old image from Cloudinary
         new_graphics = self.object.graphics
         if old_graphics != new_graphics and old_graphics:
             try:
@@ -128,11 +130,20 @@ class DrillEditView(LoginRequiredMixin,UpdateView):
 
         return response
 
-class DrillDeleteView(LoginRequiredMixin,DeleteView):
+
+class DrillDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'drills/drills-delete.html'
     form_class = DrillDeleteForm
     model = Drill
     success_url = reverse_lazy('drill-dashboard')
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.author != self.request.user:
+            if not self.request.user.is_superuser:
+                raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         # Retrieve the object to delete
@@ -156,14 +167,3 @@ class DrillDeleteView(LoginRequiredMixin,DeleteView):
 
     def form_invalid(self, form):
         return self.form_valid(form)
-
-
-
-
-
-
-
-
-
-
-
