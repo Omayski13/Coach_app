@@ -1,3 +1,5 @@
+from urllib.parse import urlparse
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
@@ -39,11 +41,15 @@ def likes_functionality(request, drill_pk: int):
     else:
         like = Like(to_drill_id=drill_pk, user=request.user)
         like.save()
+    referer = request.META.get('HTTP_REFERER')
+    if referer:
+        # Parse the referrer to handle anchors or custom logic
+        parsed_url = urlparse(referer)
+        if 'details' in parsed_url.path:
+            return redirect(reverse('drill-details', args=[drill_pk]))
 
-    referer_url = reverse('drill-dashboard')  # Ensure 'drill-dashboard' is your named URL
-    redirect_url = f"{referer_url}#{drill_pk}"
-
-    return redirect(redirect_url)
+    # Default to the dashboard if no referrer or not 'drill-details'
+    return redirect(f"{reverse('drill-dashboard')}#{drill_pk}")
 
 @login_required
 def approve_drill(request, pk):

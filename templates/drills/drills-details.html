@@ -30,6 +30,17 @@
                             </div>
                             
                         </div>
+                        <div>
+                            {% if drill.has_liked %}
+                                <a class="like-link" href="{% url 'like' drill.pk %}"><p><i id="unlike"
+                                                                                            class="fa-solid fa-trophy liked-icon"></i>{{ drill.likes.count }}
+                                </p></a>
+                            {% else %}
+                                <a class="like-link" href="{% url 'like' drill.pk %}"><p><i id="like"
+                                                                                            class="fa-solid fa-trophy not-liked-icon"></i>{{ drill.likes.count }}
+                                </p></a>
+                            {% endif %}
+                        </div>
                         <div class="date">
                             <p>Добавена на:</p>
                             <h5>{{ drill.created_at|date:"d.m.Y H:i" }}</h5>
