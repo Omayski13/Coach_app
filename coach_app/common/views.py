@@ -43,12 +43,10 @@ def likes_functionality(request, drill_pk: int):
         like.save()
     referer = request.META.get('HTTP_REFERER')
     if referer:
-        # Parse the referrer to handle anchors or custom logic
         parsed_url = urlparse(referer)
         if 'details' in parsed_url.path:
             return redirect(reverse('drill-details', args=[drill_pk]))
 
-    # Default to the dashboard if no referrer or not 'drill-details'
     return redirect(f"{reverse('drill-dashboard')}#{drill_pk}")
 
 @login_required
