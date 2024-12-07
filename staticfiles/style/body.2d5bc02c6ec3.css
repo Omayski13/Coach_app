@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url("../images/background-field.c6187e663389.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.details-link {
+    display: inline-block;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2em;
+    padding: 0.5em;
+    margin-top: 2em;
+    border-radius: 1.5em;
+    border-color: whitesmoke;
+
+}
+
+.details-text{
+    font-style: italic;
+}
+
+h2.details{
+    padding: 0.2em;
+}

@@ -1,0 +1,46 @@
+
+.details-link {
+    display: inline-block;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2em;
+    padding: 0.5em;
+    margin-top: 2em;
+    border-radius: 1.5em;
+    cursor: pointer;
+    border: whitesmoke solid 0.1em;
+}
+
+.details-link:hover {
+    background-color: whitesmoke;
+    color: black; /* Invert colors on hover */
+}
+
+a:hover{
+    color: whitesmoke;
+}
+
+.listing-details{
+    padding-bottom: 0.5em;
+    padding-top: 0.2em;
+}
+
+.details-text{
+    font-style: italic;
+    color: darkgreen;
+}
+
+h2.details{
+    padding-bottom: 0.2em;
+}
+
+.drill-details{
+    color: green;
+    margin-bottom: .01rem;
+}
+
+h1.details{
+    padding-bottom: 0.2em;
+}

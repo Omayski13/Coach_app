@@ -1,0 +1,71 @@
+.errorlist{
+    color: red;
+    list-style-type: none;
+}
+
+.container-form{
+    margin: 4em;
+}
+
+section {
+    width: 550px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    padding: 2em;
+    color: whitesmoke;
+    border-radius: 30px;
+}
+
+form h1{
+    font-size: 3em;
+    padding-bottom: 1em;
+}
+
+form button{
+    font-size: 2em;
+    padding: 0.5em;
+    margin-top: 2em;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    border-radius: 1.5em;
+    border-color: whitesmoke;
+}
+
+button:hover {
+    background-color: whitesmoke;
+    color: black; /* Invert colors on hover */
+}
+
+form p{
+    font-size:1.2em;
+}
+
+/*form ul,*/
+/*.helptext{*/
+/*    display:none*/
+/*}*/
+
+label,
+input
+ {
+    display: block;
+    padding: 0.1em;
+}
+
+.wide-input {
+    width: 300px; /* Adjust the width as needed */
+}
+
+
+label{
+    font-size:1.2em ;
+}
+
+input {
+    display: block;
+    margin: 0 auto ;
+}
+
+
+

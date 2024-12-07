@@ -1,0 +1,28 @@
+.listings{
+    width: auto;
+    margin: 2em;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    padding: 2em;
+    color: whitesmoke;
+    border-radius: 30px;
+}
+
+.listings h2 a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+.listings h2 a:hover{
+    color: green;
+    text-decoration: none;
+}
+
+.listings a{
+    cursor: pointer;
+    padding-left: 0.2em;
+}
+
+#first-icon{
+    padding-left: 0.8em;
+}
+
