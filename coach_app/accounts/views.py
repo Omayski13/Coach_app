@@ -7,6 +7,9 @@ from django.views.generic import CreateView, DetailView, UpdateView
 
 from coach_app.accounts.forms import AppUserCreationForm, AppUserEditForm
 from coach_app.accounts.models import AppUser, Profile
+from coach_app.drills.mixins import DrillFiltersMixin
+from coach_app.drills.models import Drill
+from coach_app.drills.views import DrillDashboardView
 
 
 # Create your views here.
@@ -24,6 +27,18 @@ class UserRegisterVIew(CreateView):
 class UserDetailsView(LoginRequiredMixin,DetailView):
     template_name = 'accounts/accounts-details.html'
     model = AppUser
+
+class UserDrillsView(DrillDashboardView,DrillFiltersMixin):
+    template_name = 'accounts/accounts-drills.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+    def get_queryset(self):
+        queryset = Drill.objects.filter(author=self.request.user)
+        # Use the mixin to apply filters and ordering
+        return self.get_filtered_queryset(queryset)
 
 
 

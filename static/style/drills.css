@@ -1,3 +1,20 @@
+h1#drills-dash-header{
+    /*color:black;*/
+    text-align: center;
+    padding-top: 1em;
+}
+
+h1#drills-dash-header a{
+    text-decoration: none;
+    color: inherit;
+}
+
+h1#drills-dash-header a:hover{
+    color: whitesmoke;
+}
+
+
+
 div.container-drills{
     display: flex;
     justify-content: space-between;
