@@ -36,6 +36,10 @@ class AppUser(AbstractBaseUser,PermissionsMixin):
     )
 
     @property
+    def get_lastest_drill(self):
+        return self.drills.order_by('-updated_at').get()
+
+    @property
     def get_user_tropies(self):
         return self.drills.aggregate(total_likes=Count('likes'))['total_likes'] or 0
 
