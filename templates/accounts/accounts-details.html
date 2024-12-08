@@ -37,6 +37,10 @@
                         <h2 class="details"><span class="details-text">Създадени коментрари:</span> <strong>{{ appuser.get_user_comments }}</strong>
                         </h2>
                     {% endif %}
+                    {% if appuser.drills.count > 0 %}
+                        <h2 class="details"><span class="details-text">Последно добавена тренировка:</span></h2> 
+                        <h2 class="details"><strong><a href="{% url 'drill-details' appuser.get_lastest_drill.pk %}">{{ appuser.get_lastest_drill.name }}</a></strong></h2>
+                    {% endif %}
                     {% if request.user.username == appuser.username %}
                         <a class="details-link" href="{% url 'user-edit' appuser.pk %}">Редактирай</a>
                     {% endif %}
