@@ -86,6 +86,7 @@ class DrillDetailsView(LoginRequiredMixin, DetailView):
         context['comments'] = self.object.comments.all()
         context['likes'] = self.object.likes.all()
         self.object.has_liked = self.object.likes.filter(user=self.request.user).exists()
+        self.object.has_favourited = self.object.favorite_drills.filter(user=self.request.user).exists()
 
         return context
 

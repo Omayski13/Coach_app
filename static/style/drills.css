@@ -145,13 +145,13 @@ div.container-drills{
     padding-right: 0.2em
 }
 
-/* Hover effects */
+
 .liked-icon:hover {
-    color: black; /* Inverse hover effect */
+    color: black;
 }
 
 .unliked-icon:hover {
-    color: goldenrod; /* Inverse hover effect */
+    color: goldenrod;
 }
 
 .cup-comments i#like:hover {
