@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY',config('SECRET_KEY'))
 DEBUG = os.getenv('DEBUG',config('DEBUG')) == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS',config('ALLOWED_HOSTS',[])).split(',')
-# CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', config('CSRF_TRUSTED_ORIGINS', [])).split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', config('CSRF_TRUSTED_ORIGINS', [])).split(',')
 
 
 # Application definition
@@ -159,10 +159,11 @@ STATICFILES_DIRS = (
 )
 
 cloudinary.config(
-    cloud_name=config('CLOUDINARY_CLOUD_NAME'),
-    api_key=config('CLOUDINARY_API_KEY'),
-    api_secret=config('CLOUDINARY_API_SECRET')
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME',config('CLOUDINARY_CLOUD_NAME')),
+    api_key=os.getenv('CLOUDINARY_API_KEY',config('CLOUDINARY_API_KEY')),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET',config('CLOUDINARY_API_SECRET'))
 )
+
 
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
