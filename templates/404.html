@@ -3,16 +3,7 @@
     <div class="error-not-found">
         <h1>404 Error</h1>
         <p>Сори, тренер.</p>
-        <p>Тази страница не съществува</p>
-        <a href="/">Върни се към начало</a>
+        <p>Тази страница не съществува.</p>
+        <a class="no-drills-link" href="{% url 'home-page' %}">Върни се към начало</a>
     </div>
 {% endblock %}
-
-<style>
-    div.error-not-found {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 20em 0;
-    }
-</style>

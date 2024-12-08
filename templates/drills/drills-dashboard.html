@@ -63,105 +63,110 @@
                     </div>
                 </div>
             {% empty %}
-                <div class="no-drills-container">
-                    <h1 class="no-drills">Няма добавени тренировки по зададените филтри</h1>
-                    <a class="no-drills-link" href="{% url 'drill-dashboard' %}">Махни филтри</a>
-                </div>
-
+                {% if all_drills_count > 0 %}
+                    <div class="no-drills-container">
+                        <h1 class="no-drills">Няма добавени тренировки по зададените филтри</h1>
+                        <a class="no-drills-link" href="{% url 'drill-dashboard' %}">Махни филтри</a>
+                    </div>
+                {% else %}
+                    <div class="no-drills-container">
+                        <h1 class="no-drills">Все още няма създадени тренировки</h1>
+                        <a class="no-drills-link" href="{% url 'drill-dashboard' %}">Създай първата тренировка</a>
+                {% endif %}
             {% endfor %}
 
         </div>
 
-
-        <div class="filters">
-
-            <div class="filters-box" id="header">
-                <div class="sorting">
-                    <form method="get" action="{% url 'drill-dashboard' %}">
-                        <h4 for="sort-by">Подреди по:</h4>
-                        <select id="sort-by" name="order_by" class="form-select" onchange="this.form.submit()">
-                            <option value="-created_at"
-                                    {% if request.GET.order_by == '-created_at' or request.GET.order_by is None %}selected{% endif %}>
-                                Най-нови
-                            </option>
-                            <option value="created_at" {% if request.GET.order_by == 'created_at' %}selected{% endif %}>
-                                Най-стари
-                            </option>
-                            <option value="likes" {% if request.GET.order_by == 'likes' %}selected{% endif %}>
-                                Най-харесвани
-                            </option>
-                            <option value="-likes" {% if request.GET.order_by == '-likes' %}selected{% endif %}>
-                                Най-малко харесвани
-                            </option>
-                            <option value="comments" {% if request.GET.order_by == 'comments' %}selected{% endif %}>
-                                Най-коментирани
-                            </option>
-                            <option value="-comments" {% if request.GET.order_by == '-comments' %}selected{% endif %}>
-                                Най-малко коментирани
-                            </option>
-                        </select>
-                        {% for key, value in request.GET.items %}
-                            {% if key != 'order_by' %}
-                                <input type="hidden" name="{{ key }}" value="{{ value }}">
-                            {% endif %}
+        {% if all_drills_count > 0 %}
+            <div class="filters">
+                <div class="filters-box" id="header">
+                    <div class="sorting">
+                        <form method="get" action="{% url 'drill-dashboard' %}">
+                            <h4 for="sort-by">Подреди по:</h4>
+                            <select id="sort-by" name="order_by" class="form-select" onchange="this.form.submit()">
+                                <option value="-created_at"
+                                        {% if request.GET.order_by == '-created_at' or request.GET.order_by is None %}selected{% endif %}>
+                                    Най-нови
+                                </option>
+                                <option value="created_at" {% if request.GET.order_by == 'created_at' %}selected{% endif %}>
+                                    Най-стари
+                                </option>
+                                <option value="likes" {% if request.GET.order_by == 'likes' %}selected{% endif %}>
+                                    Най-харесвани
+                                </option>
+                                <option value="-likes" {% if request.GET.order_by == '-likes' %}selected{% endif %}>
+                                    Най-малко харесвани
+                                </option>
+                                <option value="comments" {% if request.GET.order_by == 'comments' %}selected{% endif %}>
+                                    Най-коментирани
+                                </option>
+                                <option value="-comments" {% if request.GET.order_by == '-comments' %}selected{% endif %}>
+                                    Най-малко коментирани
+                                </option>
+                            </select>
+                            {% for key, value in request.GET.items %}
+                                {% if key != 'order_by' %}
+                                    <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                {% endif %}
+                            {% endfor %}
+                        </form>
+                    </div>
+                </div>
+    
+    
+                <div class="filters-box" id="header">
+                    <h1>Филтри</h1>
+                </div>
+    
+                <div class="filters-box">
+                    <h4>Тренировки</h4>
+                    <ul>
+                        <li class="{% if request.GET.approved == 'True' %}active{% endif %}">
+                            <a href="?{% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=True">
+                                Одобрени
+                            </a>
+                        </li>
+                        <li class="{% if request.GET.approved == 'False' or request.GET.approved is None %}active{% endif %}">
+                            <a href="?{% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=False">
+                                Всички тренировки
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="filters-box">
+                    <h4>Възрастова група</h4>
+                    <ul>
+                        {% for group in age_groups %}
+                            <li class="{% if request.GET.for_age_group == group %}active{% endif %}">
+                                <a href="?{% for key, value in request.GET.items %}{% if key != 'for_age_group' %}{{ key }}={{ value }}&{% endif %}{% endfor %}for_age_group={{ group }}">
+                                    {{ group }}
+                                </a>
+                            </li>
                         {% endfor %}
-                    </form>
+                    </ul>
+                </div>
+    
+                <div class="filters-box">
+                    <h4>Фокус на тренировката</h4>
+                    <ul>
+                        {% for focus_option in focus_options %}
+                            <li class="{% if request.GET.focus == focus_option %}active{% endif %}">
+                                <a href="?{% for key, value in request.GET.items %}{% if key != 'focus' %}{{ key }}={{ value }}&{% endif %}{% endfor %}focus={{ focus_option }}">
+                                    {{ focus_option }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+    
+                <div class="filters-box" id="clear-filters">
+                    <ul>
+                        <li><a href="{% url 'drill-dashboard' %}">Махни филтри</a></li>
+                    </ul>
                 </div>
             </div>
-
-
-            <div class="filters-box" id="header">
-                <h1>Филтри</h1>
-            </div>
-
-            <div class="filters-box">
-                <h4>Тренировки</h4>
-                <ul>
-                    <li class="{% if request.GET.approved == 'True' %}active{% endif %}">
-                        <a href="?{% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=True">
-                            Одобрени
-                        </a>
-                    </li>
-                    <li class="{% if request.GET.approved == 'False' or request.GET.approved is None %}active{% endif %}">
-                        <a href="?{% for key, value in request.GET.items %}{% if key != 'approved' %}{{ key }}={{ value }}&{% endif %}{% endfor %}approved=False">
-                            Всички тренировки
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="filters-box">
-                <h4>Възрастова група</h4>
-                <ul>
-                    {% for group in age_groups %}
-                        <li class="{% if request.GET.for_age_group == group %}active{% endif %}">
-                            <a href="?{% for key, value in request.GET.items %}{% if key != 'for_age_group' %}{{ key }}={{ value }}&{% endif %}{% endfor %}for_age_group={{ group }}">
-                                {{ group }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <div class="filters-box">
-                <h4>Фокус на тренировката</h4>
-                <ul>
-                    {% for focus_option in focus_options %}
-                        <li class="{% if request.GET.focus == focus_option %}active{% endif %}">
-                            <a href="?{% for key, value in request.GET.items %}{% if key != 'focus' %}{{ key }}={{ value }}&{% endif %}{% endfor %}focus={{ focus_option }}">
-                                {{ focus_option }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <div class="filters-box" id="clear-filters">
-                <ul>
-                    <li><a href="{% url 'drill-dashboard' %}">Махни филтри</a></li>
-                </ul>
-            </div>
-        </div>
+        {% endif %}
 
         <br>
         <hr>
@@ -170,27 +175,7 @@
     </div>
     </div>
     </div>
-    {% include 'common/pagination.html' %}
+    {% if all_drills_count > 0 %}
+        {% include 'common/pagination.html' %}
+    {% endif %}
 {% endblock %}
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Restore scroll position
-        const scrollPosition = new URLSearchParams(window.location.search).get('scroll');
-        if (scrollPosition) {
-            window.scrollTo(0, parseInt(scrollPosition));
-        }
-
-        // Add scroll position to like links
-        const likeLinks = document.querySelectorAll('.like-link');
-        likeLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                const currentScroll = window.scrollY; // Get current scroll position
-                const url = new URL(link.href);
-                url.searchParams.set('scroll', currentScroll); // Append scroll position
-                link.href = url.toString(); // Update link with scroll position
-            });
-        });
-    });
-</script>

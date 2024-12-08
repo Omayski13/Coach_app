@@ -65,6 +65,7 @@ class DrillDashboardView(LoginRequiredMixin, ListView, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['all_drills_count'] = Drill.objects.count()
         context['age_groups'] = ['U5 - U6', 'U7 - U8', 'U9 - U10', 'U11 - U12', 'U13 - U14', 'U15 - U16', 'U17 - U19']
         context['focus_options'] = ['Удари', 'Подаване', 'Дрибъл', '1 срещу 1', '2 срещу 1']
 
