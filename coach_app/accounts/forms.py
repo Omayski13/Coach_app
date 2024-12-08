@@ -18,7 +18,10 @@ class AppUserCreationForm(AddAsterixToRequired,UserNameTextsMixin,UsernameCleanM
 
 
 class AppUserLoginForm(UserNameOrEmailTextsMixin,PasswordTextsMixin, AuthenticationForm):
-    pass
+    error_messages = {
+        'invalid_login': 'Моля, въведете валидно потребителско име и парола.',
+        'inactive': 'Този акаунт е неактивен.',
+    }
 
 
 class AppUserDetailsForm(forms.Form):

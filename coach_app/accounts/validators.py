@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
-from django.contrib.auth.password_validation import MinimumLengthValidator as BaseMinimumLengthValidator
+from django.contrib.auth.password_validation import MinimumLengthValidator as BaseMinimumLengthValidator, \
+    UserAttributeSimilarityValidator
 from django.contrib.auth.password_validation import CommonPasswordValidator as BaseCommonPasswordValidator
 from django.contrib.auth.password_validation import NumericPasswordValidator as BaseNumericPasswordValidator
 
@@ -33,3 +34,10 @@ class CustomNumericPasswordValidator(BaseNumericPasswordValidator):
                 _('Паролата не може да бъде само цифри.'),
                 code='password_entirely_numeric',
             )
+
+
+
+class CustomUserAttributeSimilarityValidator(UserAttributeSimilarityValidator):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.message = "Паролата не трябва да бъде твърде подобна на потребителското име."

@@ -37,6 +37,11 @@
                 {% endif %}
 
             </section>
+            {% empty %}
+            <div class="no-drills-container">
+                        <h1 class="no-drills">Все още няма създадени обяви</h1>
+                        <a class="no-drills-link" href="{% url 'drill-dashboard' %}">Създай първата обява</a>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
