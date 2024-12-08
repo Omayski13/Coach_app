@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, DetailView
 from rest_framework.exceptions import PermissionDenied
 
-from coach_app.common.models import Like
+from coach_app.common.models import Like, FavoriteDrill
 from coach_app.drills.models import Drill
 
 
@@ -27,6 +27,22 @@ class HomePageView(DetailView):
             return['common/home-page-logged.html']
         else:
             return ['common/home-page-not-logged.html']
+
+
+@login_required
+def add_drill_to_favourites(request,drill_pk: int):
+    favourite_drill = FavoriteDrill.objects.filter(
+        to_drill_id=drill_pk,
+        user=request.user
+    ).first()
+
+    if favourite_drill:
+        favourite_drill.delete()
+    else:
+        favourite_drill = FavoriteDrill(to_drill_id=drill_pk,user=request.user)
+        favourite_drill.save()
+
+    return redirect(reverse('drill-details', args=[drill_pk]))
 
 
 @login_required

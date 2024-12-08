@@ -40,6 +40,13 @@
                                                                                             class="fa-solid fa-trophy not-liked-icon"></i>{{ drill.likes.count }}
                                 </p></a>
                             {% endif %}
+                            {% if drill.has_favourited %}
+                                <a class="like-link" href="{% url 'add-favourites' drill.pk %}"><p><i id="favourite-unlike"
+                                                                                            class="fa-solid fa-heart liked-icon"></i>{{ drill.favorite_drills.count }}</p></a>
+                            {% else %}
+                                <a class="like-link" href="{% url 'add-favourites' drill.pk %}"><p><i id="favourite-like"
+                                                                                            class="fa-solid fa-heart not-liked-icon"></i>{{ drill.favorite_drills.count }}</p></a>
+                            {% endif %}
                         </div>
                         <div class="date">
                             <p>Добавена на:</p>
