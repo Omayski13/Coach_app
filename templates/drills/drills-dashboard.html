@@ -7,6 +7,12 @@
         {% else %}
             <h1 id="drills-dash-header">Тренировки добавени от <a href="{% url 'user-details' user.pk %}">{{ user }}</a></h1>
         {% endif %}
+    {% elif account_favourites %}
+        {% if user.profile.get_full_name  %}
+            <h1 id="drills-dash-header">Любими тренировки на <a href="{% url 'user-details' user.pk %}">{{ user.profile.get_full_name }}</a></h1>
+        {% else %}
+            <h1 id="drills-dash-header">Любими тренировки на <a href="{% url 'user-details' user.pk %}">{{ user }}</a></h1>
+        {% endif %}
     {% endif %}
     
     <div class="search">
@@ -49,8 +55,13 @@
                                                                                             class="fa-solid fa-trophy not-liked-icon"></i>{{ drill.likes.count }}
                                 </p></a>
                             {% endif %}
-                            </a>
-
+                            {% if drill.has_favourited %}
+                                <a class="like-link" href="{% url 'add-favourites' drill.pk %}"><p><i id="unlike"
+                                                                                            class="fa-solid fa-heart liked-icon"></i>{{ drill.favorite_drills.count }}</p></a>
+                            {% else %}
+                                <a class="like-link" href="{% url 'add-favourites' drill.pk %}"><p><i id="like"
+                                                                                      class="fa-solid fa-heart not-liked-icon"></i>{{ drill.favorite_drills.count }}</p></a>
+                            {% endif %}
                             {% if drill.comments.count >= 1 %}
                                 <p href="#"><i style="color: blue"
                                                class="fa-solid fa-comments"></i> {{ drill.comments.count }}</p>
@@ -74,7 +85,13 @@
                 {% if all_drills_count > 0 %}
                     <div class="no-drills-container">
                         <h1 class="no-drills">Няма добавени тренировки по зададените филтри</h1>
-                        <a class="no-drills-link" href="{% url 'drill-dashboard' %}">Махни филтри</a>
+                        {% if account_drills  %}
+                            <a class="no-drills-link" href="{% url 'user-drills' user.pk %}">Махни филтри</a>
+                        {% elif account_favourites %}
+                              <a class="no-drills-link" href="{% url 'user-favourites' user.pk %}">Махни филтри</a>  
+                        {% else %}
+                            <a class="no-drills-link" href="{% url 'drill-dashboard' %}">Махни филтри</a>
+                        {% endif %}
                     </div>
                 {% else %}
                     <div class="no-drills-container">
@@ -172,7 +189,11 @@
                     {% if account_drills %}
                        <ul>
                         <li><a href="{% url 'user-drills' user.pk %}">Махни филтри</a></li>
-                    </ul> 
+                    </ul>
+                    {% elif account_favourites %}
+                        <ul>
+                        <li><a href="{% url 'user-favourites' user.pk %}">Махни филтри</a></li>
+                    </ul>
                     {% else %}
                     <ul>
                         <li><a href="{% url 'drill-dashboard' %}">Махни филтри</a></li>
