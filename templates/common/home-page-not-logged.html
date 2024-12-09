@@ -21,7 +21,7 @@
                 <img src="{% static 'images/trener-wave.png' %}">
             </div>
         </div>
-        {% if drills > 0 %}
+        {% if drills.count > 0 %}
             <div id="home-drill-card" class="drill-card">
             <div class="image-wrap">
                 <img src="{{ drill.graphics.url }}" alt="Drill"/>
@@ -70,6 +70,7 @@
                 <p class="like-link">
                 <p><i style="color: goldenrod" id="like"
                       class="fa-solid fa-trophy not-liked-icon"></i>{{ drill.likes.count }}
+                <p><i style="color: goldenrod" class="fa-solid fa-heart"></i> {{ drill.favorite_drills.count }}</p>
                 <p><i style="color: blue" class="fa-solid fa-comments"></i> {{ drill.comments.count }}</p>
             </div>
         {% endif %}
