@@ -17,6 +17,10 @@ class HomePageView(DetailView):
     # template_name = 'common/home-page-not-logged.html'
     context_object_name = 'drill'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['drills'] = Drill.objects.all()
+
     def get_object(self):
         drill = Drill.objects.filter(approved=True, graphics__isnull=False).first()
         return drill
