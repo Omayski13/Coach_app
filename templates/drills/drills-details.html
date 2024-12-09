@@ -23,10 +23,14 @@
                         <div class="author">
                             <p>Добавена от:</p>
                             <div class="author-details">
-                                {% if drill.author.profile_picture %}
-                                <a href="{% url 'user-details' drill.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{{ drill.author.profile.profile_picture.url }}"></a>
+                                {% if drill.author.profile.profile_picture %}
+                                    <a href="{% url 'user-details' drill.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{{ drill.author.profile.profile_picture.url }}"> </a>
                                 {% endif %}
-                                <h5><a href="{% url 'user-details' drill.author.pk %}">{{ drill.author.username }}</a></h5></a>
+                                {% if drill.author.profile.get_full_name %}
+                                    <h5><a href="{% url 'user-details' drill.author.pk %}"> {{ drill.author.profile.get_full_name }}</a></h5></a>
+                                {% else %}
+                                    <h5><a href="{% url 'user-details' drill.author.pk %}"> {{ drill.author.username }}</a></h5></a>
+                                {% endif %}
                             </div>
                             
                         </div>
@@ -103,11 +107,16 @@
             <div class="comment-card">
                 <div class="comment-header">
                     {% if comment.author.profile.profile_picture %}
-                        <a href="{% url 'user-details' comment.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{{ comment.author.profile.profile_picture.url }}"></a>
+                        <a href="{% url 'user-details' comment.author.pk %}"><img style="height: 50px;width:50px; border-radius: 50%" src="{{ comment.author.profile.profile_picture.url }}"></a>
                     {% else %}
-                        <a href="{% url 'user-details' comment.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{% static 'images/common-profile-picture.png' %}"></a>
+                        <a href="{% url 'user-details' comment.author.pk %}"><img style="height: 60px;width:60px; border-radius: 50%" src="{% static 'images/common-profile-picture.png' %}"></a>
                     {% endif %}
-                    <h6><a href="{% url 'user-details' comment.author.pk %}"> {{ comment.author }}</a></h6>
+                    {% if comment.author.profile.get_full_name %}
+                        <h6><a href="{% url 'user-details' comment.author.pk %}"> {{ comment.author.profile.get_full_name }}</a></h6>
+                    {% else %}
+                        <h6><a href="{% url 'user-details' comment.author.pk %}"> {{ comment.author }}</a></h6>
+                    {% endif %}
+                    
                     
                     
                     
