@@ -1,3 +1,6 @@
+from django.db.models import Count
+
+
 class DrillGraphicsTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -20,7 +23,6 @@ class DrillNameTextMixin():
         }
 
 
-
 class OrderFieldsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -28,12 +30,13 @@ class OrderFieldsMixin():
         ordered_fields = {field: self.fields[field] for field in field_order if field in self.fields}
         self.fields = ordered_fields
 
+
 class DrillTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        field_order = ['graphics', 'name', 'for_age_group', 'focus', 'objectives','dimensions','series','duration'
-            ,'description','coaching_points','progression']
+        field_order = ['graphics', 'name', 'for_age_group', 'focus', 'objectives', 'dimensions', 'series', 'duration'
+            , 'description', 'coaching_points', 'progression']
         ordered_fields = {field: self.fields[field] for field in field_order if field in self.fields}
         self.fields = ordered_fields
 
@@ -117,3 +120,35 @@ class DrillTextsMixin():
             'class': 'wide-input-drills'
         })
 
+
+class DrillFiltersMixin():
+    def get_filtered_queryset(self, queryset):
+        if 'query' in self.request.GET:
+            query = self.request.GET.get('query')
+            queryset = queryset.filter(name__icontains=query)
+
+        for_age_group = self.request.GET.get('for_age_group')
+        focus = self.request.GET.get('focus')
+        approved = self.request.GET.get('approved')
+
+        if for_age_group:
+            queryset = queryset.filter(for_age_group=for_age_group)
+        if focus:
+            queryset = queryset.filter(focus=focus)
+        if approved == 'True':
+            queryset = queryset.filter(approved=True)
+
+        # Apply ordering
+        order_by = self.request.GET.get('order_by', '-created_at')
+        if order_by == 'likes':
+            queryset = queryset.annotate(like_count=Count('likes')).order_by('-like_count', '-created_at')
+        elif order_by == '-likes':
+            queryset = queryset.annotate(like_count=Count('likes')).order_by('like_count', '-created_at')
+        elif order_by == 'comments':
+            queryset = queryset.annotate(comment_count=Count('comments')).order_by('-comment_count', '-created_at')
+        elif order_by == '-comments':
+            queryset = queryset.annotate(comment_count=Count('comments')).order_by('comment_count', '-created_at')
+        else:
+            queryset = queryset.order_by(order_by)
+
+        return queryset

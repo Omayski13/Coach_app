@@ -1,6 +1,14 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% block content %}
+    {% if account_drills %}
+        {% if user.profile.get_full_name  %}
+            <h1 id="drills-dash-header">Тренировки добавени от <a href="{% url 'user-details' user.pk %}">{{ user.profile.get_full_name }}</a></h1>
+        {% else %}
+            <h1 id="drills-dash-header">Тренировки добавени от <a href="{% url 'user-details' user.pk %}">{{ user }}</a></h1>
+        {% endif %}
+    {% endif %}
+    
     <div class="search">
         <form action="{% url 'drill-dashboard' %}" method="get">
             {{ form }}
@@ -161,9 +169,15 @@
                 </div>
     
                 <div class="filters-box" id="clear-filters">
+                    {% if account_drills %}
+                       <ul>
+                        <li><a href="{% url 'user-drills' user.pk %}">Махни филтри</a></li>
+                    </ul> 
+                    {% else %}
                     <ul>
                         <li><a href="{% url 'drill-dashboard' %}">Махни филтри</a></li>
                     </ul>
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
