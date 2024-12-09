@@ -10,9 +10,6 @@ from coach_app.accounts.models import Profile
 UserModel = get_user_model()
 @admin.register(UserModel)
 class AppUserAdmin(UserAdmin):
-    # model = UserModel
-    # add_form =AppUserCreationForm
-    # form = AppUserEditForm
 
     list_display = ('username', 'email', 'is_staff', 'is_superuser')
     search_fields = ('email',)
