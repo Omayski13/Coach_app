@@ -34,6 +34,7 @@
                 <button class="dropbtn"> Профил </button>
                 <div class="dropdown-content">
                     <a href="{% url 'user-details' request.user.pk %}">{{ request.user.username }}</a>
+                    <a href="{% url 'user-favourites' request.user.pk %}">Любими</a>
                     <a href="{% url 'user-edit' request.user.pk %}">Редактирай</a>
                     <a href="{% url 'user-logout' %}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Изход</a>

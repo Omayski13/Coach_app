@@ -37,6 +37,7 @@ h2.details{
 }
 
 .details a {
+    z-index: 1000;
     text-decoration: none;
     color: whitesmoke;
 }

@@ -1,9 +1,11 @@
 from cloudinary.uploader import destroy
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
+from django.core.exceptions import PermissionDenied
 
 from coach_app.accounts.forms import AppUserCreationForm, AppUserEditForm
 from coach_app.accounts.models import AppUser, Profile
@@ -37,9 +39,36 @@ class UserDrillsView(DrillDashboardView,DrillFiltersMixin):
         return context
     def get_queryset(self):
         queryset = Drill.objects.filter(author=self.request.user)
-        # Use the mixin to apply filters and ordering
         return self.get_filtered_queryset(queryset)
 
+
+class UserFavouritesView(DrillDashboardView, DrillFiltersMixin):
+    template_name = 'accounts/accounts-favourites.html'
+
+    def get_object(self):
+        # Assuming you're retrieving a user based on the 'pk' from the URL
+        UserModel = get_user_model()
+        return get_object_or_404(UserModel, pk=self.kwargs['pk'])
+
+    def dispatch(self, request, *args, **kwargs):
+        # Ensure `self.get_object()` retrieves the correct object
+        self.object = self.get_object()
+
+        # Check if the logged-in user is authorized
+        if self.request.user.pk != self.object.pk and not self.request.user.is_superuser:
+            raise PermissionDenied("You do not have permission to access this page.")
+
+        return super().dispatch(request, *args, **kwargs)
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+
+    def get_queryset(self):
+        queryset = Drill.objects.filter(favorite_drills__user=self.request.user)
+        return self.get_filtered_queryset(queryset)
 
 
 class UserEditView(LoginRequiredMixin,UpdateView):

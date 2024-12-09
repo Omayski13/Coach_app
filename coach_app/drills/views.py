@@ -71,6 +71,7 @@ class DrillDashboardView(LoginRequiredMixin, ListView, FormView):
 
         for drill in context['drills']:
             drill.has_liked = drill.likes.filter(user=self.request.user).exists()
+            drill.has_favourited = drill.favorite_drills.filter(user=self.request.user).exists()
 
         return context
 

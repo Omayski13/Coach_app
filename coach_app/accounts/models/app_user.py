@@ -37,7 +37,7 @@ class AppUser(AbstractBaseUser,PermissionsMixin):
 
     @property
     def get_lastest_drill(self):
-        return self.drills.order_by('-updated_at').get()
+        return self.drills.order_by('-updated_at').first()
 
     @property
     def get_user_tropies(self):

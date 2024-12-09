@@ -46,7 +46,13 @@ def add_drill_to_favourites(request,drill_pk: int):
         favourite_drill = FavoriteDrill(to_drill_id=drill_pk,user=request.user)
         favourite_drill.save()
 
-    return redirect(reverse('drill-details', args=[drill_pk]))
+    referer = request.META.get('HTTP_REFERER')
+    if referer:
+        parsed_url = urlparse(referer)
+        if 'details' in parsed_url.path:
+            return redirect(reverse('drill-details', args=[drill_pk]))
+
+    return redirect(f"{reverse('drill-dashboard')}#{drill_pk}")
 
 
 @login_required
