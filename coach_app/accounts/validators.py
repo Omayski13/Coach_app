@@ -1,3 +1,5 @@
+from difflib import SequenceMatcher
+
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 from django.contrib.auth.password_validation import MinimumLengthValidator as BaseMinimumLengthValidator, \
@@ -36,8 +38,22 @@ class CustomNumericPasswordValidator(BaseNumericPasswordValidator):
             )
 
 
-
 class CustomUserAttributeSimilarityValidator(UserAttributeSimilarityValidator):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.message = "Паролата не трябва да бъде твърде подобна на потребителското име."
+    def validate(self, password, user=None):
+        if not user:
+            return
+
+        # Attributes to check against
+        attributes = ['username', 'first_name', 'last_name', 'email']
+        for attribute_name in attributes:
+            value = getattr(user, attribute_name, None)
+            if not value or not isinstance(value, str):
+                continue
+
+            # Check similarity using SequenceMatcher
+            similarity = SequenceMatcher(a=password.lower(), b=value.lower()).ratio()
+            if similarity > 0.7:  # Threshold for similarity (adjust as needed)
+                raise ValidationError(
+                    "Паролата не трябва да бъде твърде подобна на потребителското име.",  # Custom message in Bulgarian
+                    code='password_too_similar',
+                )
