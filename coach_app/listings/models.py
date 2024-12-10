@@ -7,8 +7,6 @@ from coach_app.common.mixins import UpdatedAtMixin, CreatedAtMixin, ForAgeGroupM
 from coach_app.listings.validators import TelephoneValidator
 
 
-# Create your models here.
-
 class Listing(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
     club = models.CharField(
         max_length=50,
@@ -49,5 +47,3 @@ class Listing(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
         on_delete=models.CASCADE,
         related_name='listings'
     )
-
-

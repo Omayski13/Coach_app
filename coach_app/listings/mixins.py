@@ -3,9 +3,9 @@ class ListingTextsMixin():
         super().__init__(*args, **kwargs)
 
         self.fields['club'].required = True
-        self.fields['club'].label = "Отбор"
+        self.fields['club'].label = 'Отбор'
         self.fields['club'].widget.attrs.update({
-            'placeholder': "Въведи името на отбора...",
+            'placeholder': 'Въведи името на отбора...',
             'class': 'wide-input'
         })
         self.fields['club'].error_messages = {
@@ -13,9 +13,9 @@ class ListingTextsMixin():
             'invalid': 'Въведете валидно име за отбора.'
         }
 
-        self.fields['experience_needed'].label = "Необходими години опит "
+        self.fields['experience_needed'].label = 'Необходими години опит '
         self.fields['experience_needed'].widget.attrs.update({
-            'placeholder': "пример: 2",
+            'placeholder': 'пример: 2',
             'class': 'wide-input'
         })
         self.fields['experience_needed'].error_messages = {
@@ -23,7 +23,7 @@ class ListingTextsMixin():
         }
 
         self.fields['licence_required'].required = True
-        self.fields['licence_required'].label = "Необходим лиценз"
+        self.fields['licence_required'].label = 'Необходим лиценз'
         self.fields['licence_required'].widget.attrs.update({
             'class': 'wide-input'
         })
@@ -32,7 +32,7 @@ class ListingTextsMixin():
             'invalid': 'Невалиден лиценз.'
         }
 
-        self.fields['for_age_group'].label = "За възрастова група "
+        self.fields['for_age_group'].label = 'За възрастова група '
         self.fields['for_age_group'].widget.attrs.update({
             'class': 'wide-input'
         })
@@ -40,7 +40,7 @@ class ListingTextsMixin():
             'required': 'Полето "За възрастова група" е задължително.'
         }
 
-        self.fields['salary'].label = "Заплата "
+        self.fields['salary'].label = 'Заплата '
         self.fields['salary'].widget.attrs.update({
             'placeholder': "Въведи заплата....",
             'class': 'wide-input'
@@ -51,9 +51,9 @@ class ListingTextsMixin():
         }
 
         self.fields['telephone_number'].required = True
-        self.fields['telephone_number'].label = "Телефон"
+        self.fields['telephone_number'].label = 'Телефон'
         self.fields['telephone_number'].widget.attrs.update({
-            'placeholder': "Въведи телефонен за контакт....",
+            'placeholder': 'Въведи телефонен за контакт....',
             'class': 'wide-input'
         })
         self.fields['telephone_number'].error_messages ={
@@ -61,9 +61,9 @@ class ListingTextsMixin():
         }
 
         self.fields['contact_person'].required = True
-        self.fields['contact_person'].label = "Лице за контакт"
+        self.fields['contact_person'].label = 'Лице за контакт'
         self.fields['contact_person'].widget.attrs.update({
-            'placeholder': "Въведи лице за контант....",
+            'placeholder': 'Въведи лице за контант....',
             'class': 'wide-input'
         })
         self.fields['contact_person'].error_messages = {
@@ -71,9 +71,9 @@ class ListingTextsMixin():
             'invalid': 'Полете "Лице за контакт" е невалидно.'
         }
 
-        self.fields['position'].label = "Позиция на лице за контакт "
+        self.fields['position'].label = 'Позиция на лице за контакт '
         self.fields['position'].widget.attrs.update({
-            'placeholder': "пример: администратор....",
+            'placeholder': 'пример: администратор....',
             'class': 'wide-input'
         })
 

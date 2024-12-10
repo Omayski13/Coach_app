@@ -11,11 +11,10 @@ from coach_app.common.mixins import CreatedAtMixin, UpdatedAtMixin, ForAgeGroupM
 class Drill(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
     graphics = CloudinaryField(
         'image',
-        folder='drills',  # Optional: Store images in a specific folder on Cloudinary
+        folder='drills',
         null=True,
         blank=True,
     )
-
 
     name = models.CharField(
         max_length=50,
@@ -34,9 +33,7 @@ class Drill(CreatedAtMixin,UpdatedAtMixin,ForAgeGroupMixin):
         choices=FocusChoices.choices
     )
 
-    dimensions = models.CharField(
-        # make validators between 5 and 6 chars
-    )
+    dimensions = models.CharField()
 
     series = models.CharField()
 

@@ -18,8 +18,10 @@ class HomePageView(DetailView):
     context_object_name = 'drill'
 
     def get_context_data(self, **kwargs):
+
         context = super().get_context_data(**kwargs)
         context['drills'] = Drill.objects.all()
+
         return context
 
     def get_object(self):
@@ -36,6 +38,7 @@ class HomePageView(DetailView):
 
 @login_required
 def add_drill_to_favourites(request,drill_pk: int):
+
     favourite_drill = FavoriteDrill.objects.filter(
         to_drill_id=drill_pk,
         user=request.user
@@ -48,6 +51,7 @@ def add_drill_to_favourites(request,drill_pk: int):
         favourite_drill.save()
 
     referer = request.META.get('HTTP_REFERER')
+
     if referer:
         parsed_url = urlparse(referer)
         if 'details' in parsed_url.path:
@@ -68,7 +72,9 @@ def likes_functionality(request, drill_pk: int):
     else:
         like = Like(to_drill_id=drill_pk, user=request.user)
         like.save()
+
     referer = request.META.get('HTTP_REFERER')
+
     if referer:
         parsed_url = urlparse(referer)
         if 'details' in parsed_url.path:

@@ -37,5 +37,3 @@ class ListingEditForm(ListingBaseForm):
 
 class ListingDeleteForm(DisableFieldsMixin,ListingBaseForm):
     pass
-
-

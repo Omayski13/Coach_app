@@ -18,6 +18,7 @@ class Like(models.Model):
         related_name="likes",
     )
 
+
 class FavoriteDrill(models.Model):
     to_drill = models.ForeignKey(
         to=Drill,
@@ -30,4 +31,3 @@ class FavoriteDrill(models.Model):
         on_delete=models.CASCADE,
         related_name='favorite_drills',
     )
-

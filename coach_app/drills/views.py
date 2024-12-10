@@ -12,17 +12,16 @@ from coach_app.drills.mixins import DrillFiltersMixin
 from coach_app.drills.models import Drill
 
 
-# Create your views here.
-
-
 class DrillCreateView(LoginRequiredMixin, CreateView):
     template_name = 'drills/drills-create.html'
     form_class = DrillCreateForm
     success_url = reverse_lazy('drill-dashboard')
 
     def form_valid(self, form):
+
         drill = form.save(commit=False)
         drill.author = self.request.user
+
         return super().form_valid(form)
 
 
@@ -38,6 +37,7 @@ class DrillDashboardView(LoginRequiredMixin,DrillFiltersMixin, ListView, FormVie
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context['all_drills_count'] = Drill.objects.count()
         context['age_groups'] = ['U5 - U6', 'U7 - U8', 'U9 - U10', 'U11 - U12', 'U13 - U14', 'U15 - U16', 'U16 - U19']
         context['focus_options'] = ['Удари', 'Подаване', 'Дрибъл', '1 срещу 1', '2 срещу 1']
@@ -59,6 +59,7 @@ class DrillDetailsView(LoginRequiredMixin, DetailView):
         context['comment_form'] = CommentAddForm()
         context['comments'] = self.object.comments.all()
         context['likes'] = self.object.likes.all()
+
         self.object.has_liked = self.object.likes.filter(user=self.request.user).exists()
         self.object.has_favourited = self.object.favorite_drills.filter(user=self.request.user).exists()
 
@@ -89,11 +90,13 @@ class DrillEditView(LoginRequiredMixin, UpdateView):
         if self.request.user != self.object.author:
             if not self.request.user.is_superuser:
                 raise PermissionDenied
+
         return super().dispatch(request, *args, **kwargs)
 
 
     def form_valid(self, form):
         old_graphics = self.get_object().graphics
+
         response = super().form_valid(form)
 
         new_graphics = self.object.graphics
@@ -119,6 +122,7 @@ class DrillDeleteView(LoginRequiredMixin, DeleteView):
         if self.object.author != self.request.user:
             if not self.request.user.is_superuser:
                 raise PermissionDenied
+
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -129,7 +133,6 @@ class DrillDeleteView(LoginRequiredMixin, DeleteView):
                 public_id = self.object.graphics.public_id
                 destroy(public_id)
             except Exception as e:
-                # Log the error (optional)
                 print(f"Error deleting image from Cloudinary: {e}")
 
         return super().form_valid(form)

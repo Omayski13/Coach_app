@@ -2,12 +2,12 @@ from cloudinary.uploader import destroy
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.core.exceptions import PermissionDenied
 
-from coach_app.accounts.forms import AppUserCreationForm, AppUserEditForm
+from coach_app.accounts.forms import AppUserCreationForm, AppUserEditForm, AppUserLoginForm
 from coach_app.accounts.models import AppUser, Profile
 from coach_app.drills.mixins import DrillFiltersMixin
 from coach_app.drills.models import Drill
@@ -22,8 +22,14 @@ class UserRegisterVIew(CreateView):
     success_url = reverse_lazy('home-page')
 
 
-# class UserLoginView(LoginView):
-#     form_class = UserLoginForm
+class UserLoginView(LoginView):
+    authentication_form = AppUserLoginForm
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home-page')
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class UserDetailsView(LoginRequiredMixin,DetailView):
@@ -34,8 +40,10 @@ class UserDrillsView(DrillDashboardView,DrillFiltersMixin):
     template_name = 'accounts/accounts-drills.html'
 
     def get_context_data(self, **kwargs):
+
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
+
         return context
     def get_queryset(self):
         queryset = Drill.objects.filter(author=self.request.user)
@@ -46,15 +54,12 @@ class UserFavouritesView(DrillDashboardView, DrillFiltersMixin):
     template_name = 'accounts/accounts-favourites.html'
 
     def get_object(self):
-        # Assuming you're retrieving a user based on the 'pk' from the URL
         UserModel = get_user_model()
         return get_object_or_404(UserModel, pk=self.kwargs['pk'])
 
     def dispatch(self, request, *args, **kwargs):
-        # Ensure `self.get_object()` retrieves the correct object
         self.object = self.get_object()
 
-        # Check if the logged-in user is authorized
         if self.request.user.pk != self.object.pk and not self.request.user.is_superuser:
             raise PermissionDenied("You do not have permission to access this page.")
 
@@ -62,8 +67,10 @@ class UserFavouritesView(DrillDashboardView, DrillFiltersMixin):
 
 
     def get_context_data(self, **kwargs):
+
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
+
         return context
 
     def get_queryset(self):
@@ -85,13 +92,10 @@ class UserEditView(LoginRequiredMixin,UpdateView):
         )
 
     def form_valid(self, form):
-        # Get the current object before changes
         old_profile_picture = self.get_object().profile_picture
 
-        # Save the form to apply updates
         response = super().form_valid(form)
 
-        # If the graphics field has changed, delete the old image from Cloudinary
         new_profile_picture = self.object.profile_picture
         if old_profile_picture != new_profile_picture and old_profile_picture:
             try:
@@ -105,21 +109,5 @@ class UserEditView(LoginRequiredMixin,UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context['form'].fields['username'].initial = self.request.user.username
-
         return context
-
-    # def test_func(self):
-    #     profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
-    #     return self.request.user == profile.user
-
-    def get_success_url(self):
-        return reverse_lazy(
-            'user-details',
-            kwargs={
-                'pk': self.object.pk,
-            }
-        )
-
-

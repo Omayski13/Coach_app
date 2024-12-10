@@ -26,8 +26,8 @@ class AppUserAdmin(UserAdmin):
         (
             None,
             {
-                "classes": ("wide",),
-                "fields": ("email", "username" ,"password1", "password2"),
+                'classes': ('wide',),
+                'fields': ('email', 'username' ,'password1', 'password2'),
             },
         ),
     )

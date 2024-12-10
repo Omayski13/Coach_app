@@ -18,13 +18,13 @@ class UserNameTextsMixin():
             'unique': 'Това потребителско име вече е заето.',
         }
 
+
 class UsernameCleanMethiodMixin():
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if username and self.Meta.model.objects.filter(username=username).exists():
             raise ValidationError(self.fields['username'].error_messages['unique'])
         return username
-
 
 
 class UserNameOrEmailTextsMixin():
@@ -76,6 +76,7 @@ class EmailTextsMixin():
             raise ValidationError(self.fields['email'].error_messages['unique'])
         return email
 
+
 class Pass12TextsMixin():
    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -89,12 +90,13 @@ class Pass12TextsMixin():
         })
 
         self.fields['password2'].required = True
-        self.fields['password2'].help_text = ""
-        self.fields['password2'].label = "Потвърди парола"
+        self.fields['password2'].help_text = ''
+        self.fields['password2'].label = 'Потвърди парола'
         self.fields['password2'].widget.attrs.update({
-            'placeholder': "Повтори парола...",
+            'placeholder': 'Повтори парола...',
             'class': 'wide-input'
         })
+
 
 class Pass12CleanMethodMixin:
     def clean(self):
@@ -124,38 +126,35 @@ class Pass12CleanMethodMixin:
         return cleaned_data
 
 
-
 class FirstNameTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['first_name'].label = "Име"
+        self.fields['first_name'].label = 'Име'
         self.fields['first_name'].widget.attrs.update({
-            'placeholder': "Въведи Име...",
+            'placeholder': 'Въведи Име...',
             'class': 'wide-input'
         })
 
 class LastNameTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['last_name'].label = "Фамилия"
+        self.fields['last_name'].label = 'Фамилия'
         self.fields['last_name'].widget.attrs.update({
-            'placeholder': "Въведи Фамилия...",
+            'placeholder': 'Въведи Фамилия...',
             'class': 'wide-input'
         })
 class ClubTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['club'].label = "Име на отбор"
+        self.fields['club'].label = 'Име на отбор'
         self.fields['club'].widget.attrs.update({
-            'placeholder': "Въведи отбор...",
+            'placeholder': 'Въведи отбор...',
             'class': 'wide-input'
         })
 class LicenseTextsMixin():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['license'].label = "Лиценз"
+        self.fields['license'].label = 'Лиценз'
         self.fields['license'].widget.attrs.update({
             'class': 'wide-input'
         })
-
-
