@@ -10,14 +10,12 @@ class DisableFieldsMixin():
             field.widget.attrs['disabled'] = 'disabled'
 
 
-
 class AddAsterixToRequired():
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         for field in self.fields.values():
             if field.required:
-                field.label = f"{field.label} * "
-
+                field.label = f'{field.label} * '
 
 
 class CreatedAtMixin(models.Model):
@@ -27,7 +25,6 @@ class CreatedAtMixin(models.Model):
 
     class Meta:
         abstract = True
-
 
 
 class UpdatedAtMixin(models.Model):
@@ -48,6 +45,6 @@ class ForAgeGroupMixin(models.Model):
     )
 
     class Meta:
-        abstract=True
+        abstract = True
 
 

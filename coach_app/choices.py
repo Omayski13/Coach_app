@@ -11,7 +11,6 @@ class AccountsLicenceChoices(models.TextChoices):
     NONE = 'Без лиценз', 'Без лиценз'
 
 
-
 class AgeGroupsChoices(models.TextChoices):
     U6 = 'U5 - U6', 'U5 - U6'
     U8 = 'U7 - U8', 'U7 - U8'
@@ -25,8 +24,8 @@ class AgeGroupsChoices(models.TextChoices):
 
 class FocusChoices(models.TextChoices):
     SHOOTING = 'Удари', 'Удари'
-    PASSING = 'Подаване','Подаване'
-    DRIBBLING = 'Дрибъл','Дрибъл'
-    POSSESSION = 'Владение','Владение'
-    ONE_VS_ONE = '1 срещу 1','1 срещу 1',
-    TWO_VS_ONE = '2 срещу 1','2 срещу 1'
+    PASSING = 'Подаване', 'Подаване'
+    DRIBBLING = 'Дрибъл', 'Дрибъл'
+    POSSESSION = 'Владение', 'Владение'
+    ONE_VS_ONE = '1 срещу 1', '1 срещу 1',
+    TWO_VS_ONE = '2 срещу 1', '2 срещу 1'

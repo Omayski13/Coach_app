@@ -9,17 +9,16 @@ from coach_app.listings.forms import ListingCreateForm, ListingDetailForm, Listi
 from coach_app.listings.models import Listing
 
 
-# Create your views here.
-
-
 class ListingCreateView(LoginRequiredMixin,CreateView):
     template_name = 'listings/listing-create.html'
     form_class = ListingCreateForm
     success_url = reverse_lazy('listing-dashboard')
 
     def form_valid(self, form):
+
         listing = form.save(commit=False)
         listing.author = self.request.user
+
         return super().form_valid(form)
 
 
@@ -62,6 +61,7 @@ class ListingDeleteView(LoginRequiredMixin,DeleteView):
 
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
+
         if self.object.author != self.request.user:
             if not self.request.user.is_superuser:
                 raise PermissionDenied
@@ -72,5 +72,3 @@ class ListingDeleteView(LoginRequiredMixin,DeleteView):
 
     def form_invalid(self, form):
         return self.form_valid(form)
-
-

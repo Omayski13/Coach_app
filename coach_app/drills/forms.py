@@ -11,7 +11,6 @@ class BaseDrillForm(AddAsterixToRequired,DrillTextsMixin,forms.ModelForm):
         exclude = ('author','created_at','updated_at', 'approved')
 
 
-
 class DrillCreateForm(DrillGraphicsTextsMixin,DrillNameTextMixin,BaseDrillForm):
     def save(self,commit=True):
         drill = super().save(commit=False)
@@ -23,16 +22,17 @@ class DrillCreateForm(DrillGraphicsTextsMixin,DrillNameTextMixin,BaseDrillForm):
         return drill
 
 
-
 class DrillEditForm(DrillGraphicsTextsMixin,DrillNameTextMixin,BaseDrillForm):
     pass
 
 
 class DrillDeleteForm(DisableFieldsMixin,BaseDrillForm,OrderFieldsMixin):
-    field_order = ['for_age_group', 'focus', 'objectives','dimensions','series','duration','description','coaching_points','progression']
+    field_order = ['for_age_group', 'focus', 'objectives','dimensions','series','duration','description',
+                   'coaching_points','progression']
     class Meta:
         model = Drill
-        exclude = ('author','created_at','updated_at','name','graphics')
+        exclude = ('author', 'created_at', 'updated_at', 'name', 'graphics')
+
 
 class SearchForm(forms.Form):
     query = forms.CharField(
@@ -41,8 +41,8 @@ class SearchForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class':'search-field',
-                'placeholder':'Търси тренировка по име....'
+                'class': 'search-field',
+                'placeholder': 'Търси тренировка по име....'
             }
 
         )
