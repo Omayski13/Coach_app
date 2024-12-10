@@ -25,6 +25,8 @@
                             <div class="author-details">
                                 {% if drill.author.profile.profile_picture %}
                                     <a href="{% url 'user-details' drill.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{{ drill.author.profile.profile_picture.url }}"> </a>
+                                {% else %}
+                                    <a href="{% url 'user-details' drill.author.pk %}"><img style="height: 35px;width:35px; border-radius: 50%" src="{% static 'images/common-profile-picture.png' %}"> </a>
                                 {% endif %}
                                 {% if drill.author.profile.get_full_name %}
                                     <h5><a href="{% url 'user-details' drill.author.pk %}"> {{ drill.author.profile.get_full_name }}</a></h5></a>

@@ -106,7 +106,7 @@
             <div class="filters">
                 <div class="filters-box" id="header">
                     <div class="sorting">
-                        <form method="get" action="{% url 'drill-dashboard' %}">
+                        <form method="get" action="{{ request.path }}">
                             <h4 for="sort-by">Подреди по:</h4>
                             <select id="sort-by" name="order_by" class="form-select" onchange="this.form.submit()">
                                 <option value="-created_at"

@@ -75,10 +75,16 @@ div.container-drills{
 .drill-author-date .author{
     display: inline-block;
 }
+.date h5,
+.author-details h5{
+    padding-top: 0.2em;
+    padding-left: 0.2em;
+}
 
 .author-details a{
     text-decoration: none;
     color: whitesmoke;
+
 }
 
 .author-details a:hover{
