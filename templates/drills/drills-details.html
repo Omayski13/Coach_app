@@ -103,6 +103,9 @@
                         <div class="drill-buttons">
                             <a class="details-drills" href="{% url 'drill-edit' drill.pk %}">Редактирай</a>
                         </div>
+                            <div class="drill-buttons">
+                            <a class="details-drills" href="{% url 'drill-delete' drill.pk %}">Изтрий</a>
+                        </div>
                         {% endif %}
                 </div>
             </form>

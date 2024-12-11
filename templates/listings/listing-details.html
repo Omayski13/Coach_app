@@ -44,6 +44,9 @@
                         <div class="drill-buttons">
                             <a class="details-drills" href="{% url 'listing-edit' listing.pk %}">Редактирай</a>
                         </div>
+                        <div class="drill-buttons">
+                            <a class="details-drills" href="{% url 'listing-delete' listing.pk %}">Изтрий</a>
+                        </div>
                     {% endif %}
                 </div>
 {#            </form>#}
