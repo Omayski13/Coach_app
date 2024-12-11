@@ -99,6 +99,11 @@
                             <h2 class="details"><span class="details-text"> </span>
                                 <strong>{{ drill.progression }}</strong></h2>
                         {% endif %}
+                        {% if drill.author.pk == request.user.pk or request.user.is_superuser %}
+                        <div class="drill-buttons">
+                            <a class="details-drills" href="{% url 'drill-edit' drill.pk %}">Редактирай</a>
+                        </div>
+                        {% endif %}
                 </div>
             </form>
         </section>

@@ -40,6 +40,11 @@
                         <h2 class="details"><span class="details-text"> Позиция:</span>
                         <strong>{{ listing.position }}</strong></h2>
                     {% endif %}
+                    {% if listing.author.pk == request.user.pk or request.user.is_superuser %}
+                        <div class="drill-buttons">
+                            <a class="details-drills" href="{% url 'listing-edit' listing.pk %}">Редактирай</a>
+                        </div>
+                    {% endif %}
                 </div>
 {#            </form>#}
         </section>
