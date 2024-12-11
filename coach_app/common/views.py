@@ -25,7 +25,7 @@ class HomePageView(DetailView):
         return context
 
     def get_object(self):
-        drill = Drill.objects.filter(approved=True, graphics__isnull=False).first()
+        drill = Drill.objects.filter(approved=True, graphics__isnull=False).last()
         return drill
 
 
