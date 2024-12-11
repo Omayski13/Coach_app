@@ -66,20 +66,40 @@ You can view the live version of the project here: [Live Demo](https://bg-trener
   
    ```
 
-### 4. Change DB settings in settings.py
+### 4. Step 3: Create a .env File
+At the root level of the project (where manage.py is located), create a .env file using [this template](https://github.com/Omayski13/Coach_app/blob/main/.env.template) or just copy from below:
 
   ```py
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "your_db_name",
-            "USER": "your_username",
-            "PASSWORD": "your_pass",
-            "HOST": "127.0.0.1",
-            "PORT": "5432",
-        }
-    }
+    # Security
+SECRET_KEY=
+DEBUG=
+ALLOWED_HOSTS=
+CSRF_TRUSTED_ORIGINS=
+
+# Database
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+
+#Cloudinary
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+#Mailjet
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+EMAIL_USE_TLS=
+COMPANY_EMAIL=
   ```
+**Note:** Visit these two link to get your API keys, it's free and only registration is required:
+   - [Cloudinary](https://cloudinary.com/)
+   - [Mailjet](https://www.mailjet.com/)
+
 
 ### 5. Run the migrations
 
