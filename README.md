@@ -13,6 +13,7 @@ You can view the live version of the project here: [Live Demo](https://bg-trener
 | superuser | admin | admin@admin.com | admin |
 | staff | staff1 | staff1@gmail.com | Vrubnica1@ |
 |common user| user1| user1@gmail.com | Nadejda1@ |
+|common user| user2| user2@gmail.com | Nadejda2@ |
 
 ## 🌟Features
 - **Training Session Management:** Share,organize, and discover drills and exercises for *7 age groups* and *6 different focuses* of the training:
@@ -28,6 +29,7 @@ You can view the live version of the project here: [Live Demo](https://bg-trener
 - Front-End Styling: **Custom CSS** for a unique and responsive user interface
 - Authentication: **Custom authentication** backend with **support for email or username login**
 - Forms: Built-in Django forms with **custom validation for login and registration**.
+- Asynchronous Features: An **async function** sends a greeting email to users upon registration, **ensuring a seamless and non-blocking experience**.
 
 
 # 🚀Project setup
