@@ -7,6 +7,7 @@ Whether you're coaching grassroots teams or professional players, BG Football Tr
 ## 🌐Deployment
 You can view the live version of the project here: [Live Demo](https://bg-trener-bbe3fjc8g0aqgsbz.italynorth-01.azurewebsites.net/).
 
+
 ## 🔧Testing User Accounts
 | Role | Username | Email | Password |
 |----------|----------|----------|----------|
