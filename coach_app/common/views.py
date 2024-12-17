@@ -20,7 +20,7 @@ class HomePageView(DetailView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
-        context['drills'] = Drill.objects.all()
+        context['drills'] = Drill.objects.filter(approved=True)
 
         return context
 

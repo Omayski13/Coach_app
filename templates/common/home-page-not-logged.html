@@ -14,65 +14,15 @@
                 <p>За да използваш пълната функционалност на сайта и да можеш да видиш всички качени тренировки трябва
                     да си регистриран. За да го направиш цъкни <a href="{% url 'user-register' %}">ТУК</a></p>
                 <p>Ако вече имаш профил използвай<a href="{% url 'user-login' %}"> ВХОД</a></p>
-                <h3>Ако все още не сме те убедили да се регистрираш можеш да погледнеш последната качена тренировка без
-                    регистрация</h3>
+                <h3>Ако все още не сме те убедили да се регистрираш можеш да погледнеш последната качена и одобрена тренировка без
+                    регистрация.</h3>
+                <p>Съжаляваме, но все още нямаме добавени тренировки, които да са одобрени от нашия екип.</p>
+                <p>Все пак можеш да погледнеш примерно добавена тренировка. Можеш и да се <a href="{% url 'user-register' %}">регистрираш</a> и да добавиш своя</p>
             </div>
             <div class="home-image-container">
                 <img src="{% static 'images/trener-wave.png' %}">
             </div>
         </div>
-        {% if drills.count > 0 %}
-            <div id="home-drill-card" class="drill-card">
-            <div class="image-wrap">
-                <img src="{{ drill.graphics.url }}" alt="Drill"/>
-            </div>
-            <div class="drill-info">
-            <h1>{{ drill.name }} <img style="width: 70px;height: 70px"
-                                      src="{% static 'images/coach-like-big.png' %}"></h1>
-            <div id="home-page" class="details">
-                <div class="focus-age-group">
-                    <h4>Добавена от: </h4>
-                    <h4><span class="home-text-details">{{ drill.author }}</span></h4>
-                    <h4>Възраст: </h4>
-                    <h4><span class="home-text-details">{{ drill.for_age_group }}</span></h4>
-                    <h4>Фокус: </h4>
-                    <h4><span class="home-text-details">{{ drill.focus }}</span></h4>
-                </div>
-                <div class="objectives-dimensions">
-                    <h4>Цели: </h4>
-                    <h4><span class="home-text-details">{{ drill.objectives }}</span></h4>
-                    <h4>Размери: </h4>
-                    <h4><span class="home-text-details">{{ drill.dimensions }}</span></h4>
-                    <h4>Серии: </h4>
-                    <h4><span class="home-text-details">{{ drill.series }}</span></h4>
-                </div>
-                {% if drill.duration or drill.coaching_points or drill.progression %}
-                    <div class="series-duration">
-                        {% if drill.duration %}
-                            <h4>Времетраене: </h4>
-                            <h4><span class="home-text-details">{{ drill.duration }} минути</span></h4>
-                        {% endif %}
-                        {% if drill.coaching_points %}
-                            <h4>Треньорски цели: </h4>
-                            <h4><span class="home-text-details">{{ drill.coaching_points }}</span></h4>
-                        {% endif %}
-                        {% if drill.progression %}
-                            <h4>Прогресия: </h4>
-                            <h4><span class="home-text-details">{{ drill.progression }}</span></h4>
-                        {% endif %}
-                    </div>
-                {% endif %}
-
-            </div>
-            <h4><span class="home-text-details">Описание:</span></h4>
-            <p class="description">{{ drill.description|truncatewords:50 }}</p>
-            <div class="cup-comments">
-                <p class="like-link">
-                <p><i style="color: goldenrod" id="like"
-                      class="fa-solid fa-trophy not-liked-icon"></i>{{ drill.likes.count }}
-                <p><i style="color: goldenrod" class="fa-solid fa-heart"></i> {{ drill.favorite_drills.count }}</p>
-                <p><i style="color: blue" class="fa-solid fa-comments"></i> {{ drill.comments.count }}</p>
-            </div>
-        {% endif %}
+        {% include 'common/home-page-drill.html' %}
     </main>
 {% endblock %}
