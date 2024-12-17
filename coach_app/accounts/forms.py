@@ -8,7 +8,7 @@ from coach_app.accounts.mixins import UserNameTextsMixin, EmailTextsMixin, Pass1
     UserNameOrEmailTextsMixin, FirstNameTextsMixin, LastNameTextsMixin, ClubTextsMixin, LicenseTextsMixin, \
     UsernameCleanMethiodMixin, Pass12CleanMethodMixin
 from coach_app.accounts.models import AppUser, Profile
-from coach_app.common.mixins import AddAsterixToRequired
+from coach_app.common.mixins import AddAsterixToRequired, CloudinaryImageValidatorMixin
 
 
 class AppUserCreationForm(AddAsterixToRequired,UserNameTextsMixin,UsernameCleanMethiodMixin, EmailTextsMixin,Pass12TextsMixin,Pass12CleanMethodMixin, UserCreationForm):
@@ -57,7 +57,7 @@ class AppUserDetailsForm(forms.Form):
     )
 
 
-class AppUserEditForm(UserNameTextsMixin,FirstNameTextsMixin,LastNameTextsMixin,ClubTextsMixin,LicenseTextsMixin,forms.ModelForm):
+class AppUserEditForm(CloudinaryImageValidatorMixin,UserNameTextsMixin,FirstNameTextsMixin,LastNameTextsMixin,ClubTextsMixin,LicenseTextsMixin,forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'
@@ -66,6 +66,9 @@ class AppUserEditForm(UserNameTextsMixin,FirstNameTextsMixin,LastNameTextsMixin,
         max_length=50,
         required=True
     )
+
+    def clean_profile_picture(self):
+       return self.validate_field('profile_picture')
 
     def clean_username(self):
         username = self.cleaned_data['username']
