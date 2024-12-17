@@ -44,10 +44,16 @@ class UserDrillsView(DrillDashboardView,DrillFiltersMixin):
 
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
+        context['user_drills'] = self.request.user.drills.all()
+
+        context['viewed_user'] = get_object_or_404(AppUser, pk=self.kwargs['pk'])
 
         return context
     def get_queryset(self):
-        queryset = Drill.objects.filter(author=self.request.user)
+
+        viewed_user = get_object_or_404(AppUser, pk=self.kwargs['pk'])
+        queryset = Drill.objects.filter(author=viewed_user)
+
         return self.get_filtered_queryset(queryset)
 
 
@@ -71,6 +77,7 @@ class UserFavouritesView(DrillDashboardView, DrillFiltersMixin):
 
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
+        context['user_favourites'] = self.request.user.favorite_drills.all()
 
         return context
 
@@ -93,6 +100,13 @@ class UserEditView(LoginRequiredMixin,DeleteCloudinaryFormValidMixin,UpdateView)
             }
         )
 
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.pk != self.request.user.pk:
+            if not self.request.user.is_superuser:
+                raise PermissionDenied
+        return super().dispatch(request,*args,**kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

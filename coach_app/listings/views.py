@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, FormView, UpdateView, DeleteView
-from rest_framework.exceptions import PermissionDenied
 
 from coach_app.listings.forms import ListingCreateForm, ListingDetailForm, ListingEditForm, ListingDeleteForm
 from coach_app.listings.models import Listing

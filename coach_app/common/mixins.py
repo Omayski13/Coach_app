@@ -1,4 +1,5 @@
 from cloudinary.uploader import destroy
+from django.core.exceptions import PermissionDenied
 from django.db import models
 
 from coach_app.choices import AgeGroupsChoices
