@@ -1,5 +1,7 @@
+from PIL import Image
+from cloudinary import CloudinaryResource
 from cloudinary.uploader import destroy
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import models
 
 from coach_app.choices import AgeGroupsChoices
@@ -83,3 +85,22 @@ class DeleteCloudinaryFormValidMixin():
                 print(f"Error deleting old graphics from Cloudinary: {e}")
 
         return response
+
+
+class CloudinaryImageValidatorMixin():
+    def validate_field(self, field_name):
+        field_value = self.cleaned_data.get(field_name)
+
+        if isinstance(field_value,CloudinaryResource):
+            return field_value
+
+        if field_value:
+            try:
+                img = Image.open(field_value)
+                img.verify()  # Ensure the file is a valid image
+                return field_value
+            except Exception:
+                raise ValidationError('Това поле трябва да бъде изображение.')
+
+        return field_value
+
