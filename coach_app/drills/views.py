@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView, FormView
 
 from coach_app.comments.forms import CommentAddForm
+from coach_app.common.mixins import DeleteCloudinaryFormValidMixin
 from coach_app.drills.forms import DrillCreateForm, DrillDeleteForm, DrillEditForm, SearchForm
 from coach_app.drills.mixins import DrillFiltersMixin
 from coach_app.drills.models import Drill
@@ -78,11 +79,12 @@ class DrillDetailsView(LoginRequiredMixin, DetailView):
             return redirect(f'{self.request.path}#comments')
 
 
-class DrillEditView(LoginRequiredMixin, UpdateView):
+class DrillEditView(LoginRequiredMixin,DeleteCloudinaryFormValidMixin, UpdateView):
     template_name = 'drills/drills-edit.html'
     form_class = DrillEditForm
     model = Drill
     success_url = reverse_lazy('drill-dashboard')
+    cloudinary_delete_field = 'graphics'
 
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -93,21 +95,6 @@ class DrillEditView(LoginRequiredMixin, UpdateView):
 
         return super().dispatch(request, *args, **kwargs)
 
-
-    def form_valid(self, form):
-        old_graphics = self.get_object().graphics
-
-        response = super().form_valid(form)
-
-        new_graphics = self.object.graphics
-        if old_graphics != new_graphics and old_graphics:
-            try:
-                public_id = old_graphics.public_id
-                destroy(public_id)
-            except Exception as e:
-                print(f"Error deleting old graphics from Cloudinary: {e}")
-
-        return response
 
 
 class DrillDeleteView(LoginRequiredMixin, DeleteView):

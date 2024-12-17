@@ -9,6 +9,7 @@ from django.core.exceptions import PermissionDenied
 
 from coach_app.accounts.forms import AppUserCreationForm, AppUserEditForm, AppUserLoginForm
 from coach_app.accounts.models import AppUser, Profile
+from coach_app.common.mixins import DeleteCloudinaryFormValidMixin
 from coach_app.drills.mixins import DrillFiltersMixin
 from coach_app.drills.models import Drill
 from coach_app.drills.views import DrillDashboardView
@@ -78,10 +79,11 @@ class UserFavouritesView(DrillDashboardView, DrillFiltersMixin):
         return self.get_filtered_queryset(queryset)
 
 
-class UserEditView(LoginRequiredMixin,UpdateView):
+class UserEditView(LoginRequiredMixin,DeleteCloudinaryFormValidMixin,UpdateView):
     template_name = 'accounts/accounts-edit.html'
     form_class = AppUserEditForm
     model = Profile
+    cloudinary_delete_field = 'profile_picture'
 
     def get_success_url(self):
         return reverse_lazy(
@@ -90,21 +92,6 @@ class UserEditView(LoginRequiredMixin,UpdateView):
                 'pk':self.object.pk
             }
         )
-
-    def form_valid(self, form):
-        old_profile_picture = self.get_object().profile_picture
-
-        response = super().form_valid(form)
-
-        new_profile_picture = self.object.profile_picture
-        if old_profile_picture != new_profile_picture and old_profile_picture:
-            try:
-                public_id = old_profile_picture.public_id
-                destroy(public_id)
-            except Exception as e:
-                print(f"Error deleting old graphics from Cloudinary: {e}")
-
-        return response
 
 
     def get_context_data(self, **kwargs):
