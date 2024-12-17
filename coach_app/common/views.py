@@ -56,8 +56,12 @@ def add_drill_to_favourites(request,drill_pk: int):
         parsed_url = urlparse(referer)
         if 'details' in parsed_url.path:
             return redirect(reverse('drill-details', args=[drill_pk]))
+        elif 'favourites' in parsed_url.path:
+            return redirect(f"{reverse('user-favourites', args=[request.user.pk])}#{drill_pk}")
+        elif 'dashboard' in parsed_url.path:
+            redirect(f"{reverse('drill-dashboard')}#{drill_pk}")
 
-    return redirect(f"{reverse('drill-dashboard')}#{drill_pk}")
+    return redirect(f"{reverse('user-drills', args=[request.user.pk])}#{drill_pk}")
 
 
 @login_required
@@ -79,8 +83,12 @@ def likes_functionality(request, drill_pk: int):
         parsed_url = urlparse(referer)
         if 'details' in parsed_url.path:
             return redirect(reverse('drill-details', args=[drill_pk]))
+        elif 'favourites' in parsed_url.path:
+            return redirect(f"{reverse('user-favourites', args=[request.user.pk])}#{drill_pk}")
+        elif 'dashboard' in parsed_url.path:
+            redirect(f"{reverse('drill-dashboard')}#{drill_pk}")
 
-    return redirect(f"{reverse('drill-dashboard')}#{drill_pk}")
+    return redirect(f"{reverse('user-drills', args=[request.user.pk])}#{drill_pk}")
 
 @login_required
 def approve_drill(request, pk):

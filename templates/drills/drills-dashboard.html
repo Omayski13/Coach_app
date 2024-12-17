@@ -16,7 +16,13 @@
     {% endif %}
     
     <div class="search">
-        <form action="{% url 'drill-dashboard' %}" method="get">
+        {% if account_drills %}
+            <form action="{% url 'user-drills' user.pk %}" method="get">
+        {% elif account_favourites %}
+            <form action="{% url 'user-favourites' user.pk %}" method="get">
+        {% else %}
+            <form action="{% url 'drill-dashboard' %}" method="get">
+        {% endif %}
             {{ form }}
             <button class="search-button"><i class="fa-solid fa-magnifying-glass"></i> Търси</button>
         </form>
