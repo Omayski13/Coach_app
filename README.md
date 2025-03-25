@@ -112,6 +112,7 @@ COMPANY_EMAIL=
 
   ```
 
+
 ### 6. Run the project
 
   ```terminal
